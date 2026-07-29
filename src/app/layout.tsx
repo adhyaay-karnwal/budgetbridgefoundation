@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const acuminPro = localFont({
@@ -30,9 +31,9 @@ const acuminPro = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "BBF — Brand & Beyond",
+  title: "Budget Bridge Foundation",
   description:
-    "A professional branding and design company crafting identities that stand the test of time.",
+    "Budget Bridge teaches money skills — seminars, tutoring, workshops, and advocacy so every student can thrive.",
 };
 
 export default function RootLayout({
@@ -42,9 +43,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${acuminPro.variable} h-full antialiased`}>
-      <body className="min-h-full font-sans">
+      <body className="flex min-h-full flex-col font-sans">
         <Header />
-        {children}
+        <div className="flex-1">{children}</div>
+        <Footer />
       </body>
     </html>
   );

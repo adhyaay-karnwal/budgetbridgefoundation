@@ -6,6 +6,8 @@
   --accent: #1a1a2e;
   --muted: #6b7280;
   --border: #e5e7eb;
+  /* Natural primary hover — olive wash over white */
+  --button-hover: rgba(17, 20, 0, 0.75);
 }
 
 @theme inline {
@@ -15,10 +17,18 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --font-sans: var(--font-acumin-pro);
+  /* Prefer medium emphasis over heavy Acumin Bold */
+  --font-weight-bold: 500;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-acumin-pro), Arial, Helvetica, sans-serif;
+}
+
+/* Matches natural.com: 40px min gutter; centers 1200px content on wide screens */
+@utility content-gutter-x {
+  padding-left: max(2.5rem, calc((100% - 1200px) / 2));
+  padding-right: max(2.5rem, calc((100% - 1200px) / 2));
 }
