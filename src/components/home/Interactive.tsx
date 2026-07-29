@@ -11,16 +11,17 @@ import {
 } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
 import {
+  AtmosphericStage,
   GraphicStage,
   ProgramCardAdvocacy,
   ProgramCardEducation,
   ProgramCardSeminars,
   ProgramCardVolunteers,
-  ProgramFlowStage,
   SoftCard,
 } from "@/components/home/graphics";
 import { TextLink } from "@/components/home/primitives";
 import { Icon, type IconProps } from "@/components/Icon";
+import { MEDIA } from "@/lib/media";
 
 type ProgramTab = {
   id: string;
@@ -84,7 +85,9 @@ export function ProgramsShowcase({ tabs }: { tabs: readonly ProgramTab[] }) {
 
   return (
     <div>
-      <ProgramFlowStage>{card}</ProgramFlowStage>
+      <GraphicStage className="aspect-[16/9] w-full min-h-[320px] md:min-h-[420px]">
+        {card}
+      </GraphicStage>
 
       <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {tabs.map((tab) => {
@@ -133,7 +136,10 @@ export function InvolvedShowcase({
         {intro}
       </p>
 
-      <GraphicStage className="relative min-h-[400px] px-5 pb-20 pt-10 sm:px-8 sm:pb-16 sm:pt-12">
+      <AtmosphericStage
+        atmosphere={MEDIA.atmospheres.curtains.src}
+        className="relative min-h-[400px] sm:min-h-[440px]"
+      >
         <SoftCard className="relative z-10 w-full max-w-[560px] p-5 sm:p-6">
           <p className="text-[13px] text-[#a3a3a3]">Departments</p>
           <p className="mt-1 text-[22px] font-medium text-[#161514]">
@@ -163,10 +169,10 @@ export function InvolvedShowcase({
           </ul>
         </SoftCard>
 
-        <p className="absolute bottom-4 right-4 max-w-[220px] text-right text-[12px] leading-4 text-[#a3a3a3] sm:bottom-5 sm:right-5">
+        <p className="absolute bottom-4 right-4 z-10 max-w-[220px] text-right text-[12px] leading-4 text-white/80 sm:bottom-5 sm:right-5">
           Email us or DM us on Instagram to schedule an interview.
         </p>
-      </GraphicStage>
+      </AtmosphericStage>
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
         <AccentButton href="/get-involved">Volunteer</AccentButton>

@@ -25,6 +25,36 @@ export const MEDIA = {
       alt: "Budget Bridge at a conference",
     },
   },
+  atmospheres: {
+    curtains: {
+      src: "/media/atmospheres/atmosphere-01.jpg",
+      alt: "",
+    },
+    shoreline: {
+      src: "/media/atmospheres/atmosphere-02.jpg",
+      alt: "",
+    },
+    dusk: {
+      src: "/media/atmospheres/atmosphere-03.jpg",
+      alt: "",
+    },
+    clouds: {
+      src: "/media/atmospheres/atmosphere-04.jpg",
+      alt: "",
+    },
+    warmSky: {
+      src: "/media/atmospheres/atmosphere-05.jpg",
+      alt: "",
+    },
+    bridge: {
+      src: "/media/atmospheres/atmosphere-06.jpg",
+      alt: "",
+    },
+    softField: {
+      src: "/media/atmospheres/atmosphere-07.jpg",
+      alt: "",
+    },
+  },
   highlights: {
     story: {
       src: "/media/highlights/our-story.jpg",

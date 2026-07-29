@@ -155,7 +155,7 @@ export const BLOG = {
       dateShort: "Sep 21",
       author: "Sonya Viswanath",
       cover: {
-        src: "/media/blog/political-economic-personal-finance.jpg",
+        src: "/media/blog/finance-washington-collage.jpg",
         alt: "Political and economic forces shaping personal finance",
       },
       excerpt:

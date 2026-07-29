@@ -19,6 +19,35 @@ export function GraphicStage({ children, className = "" }: StageProps) {
   );
 }
 
+type AtmosphericStageProps = StageProps & {
+  atmosphere: string;
+};
+
+/** Natural-style textured photo stage with floating UI on top */
+export function AtmosphericStage({
+  children,
+  atmosphere,
+  className = "",
+}: AtmosphericStageProps) {
+  return (
+    <div
+      className={`relative flex items-center justify-center overflow-hidden rounded-[2px] ${className}`}
+    >
+      <Image
+        src={atmosphere}
+        alt=""
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        aria-hidden
+      />
+      <div className="relative z-10 flex h-full min-h-[inherit] w-full items-center justify-center p-5 sm:p-8">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 /** Floating white UI card on a gray stage (Natural-style) */
 export function SoftCard({ children, className = "p-4" }: StageProps) {
   return (
@@ -83,7 +112,10 @@ export function GraphicCurriculum() {
   ];
 
   return (
-    <GraphicStage className="aspect-[4/3] w-full">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.clouds.src}
+      className="aspect-[4/3] w-full"
+    >
       <SoftCard className="w-[78%] max-w-[240px] p-4">
         <MutedLabel>Lesson</MutedLabel>
         <p className="mt-1 text-[16px] font-medium text-[#161514]">
@@ -100,13 +132,16 @@ export function GraphicCurriculum() {
           ))}
         </ul>
       </SoftCard>
-    </GraphicStage>
+    </AtmosphericStage>
   );
 }
 
 export function GraphicTutoring() {
   return (
-    <GraphicStage className="aspect-[4/3] w-full">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.shoreline.src}
+      className="aspect-[4/3] w-full"
+    >
       <SoftCard className="w-[78%] max-w-[240px] p-4">
         <div className="flex items-center justify-between">
           <MutedLabel>Live session</MutedLabel>
@@ -131,13 +166,16 @@ export function GraphicTutoring() {
           ))}
         </div>
       </SoftCard>
-    </GraphicStage>
+    </AtmosphericStage>
   );
 }
 
 export function GraphicGameClass() {
   return (
-    <GraphicStage className="aspect-[4/3] w-full">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.curtains.src}
+      className="aspect-[4/3] w-full"
+    >
       <div className="relative mx-auto w-[86%] max-w-[280px] overflow-hidden rounded-[10px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
         <Image
           src={MEDIA.programs.gameclass.src}
@@ -147,7 +185,7 @@ export function GraphicGameClass() {
           className="h-auto w-full"
         />
       </div>
-    </GraphicStage>
+    </AtmosphericStage>
   );
 }
 
@@ -171,7 +209,10 @@ export function GraphicFounders() {
 
 export function GraphicAdvocacy() {
   return (
-    <GraphicStage className="aspect-square w-full min-h-[280px]">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.bridge.src}
+      className="aspect-square w-full min-h-[280px]"
+    >
       <SoftCard className="w-[82%] max-w-[280px] p-5">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -198,20 +239,23 @@ export function GraphicAdvocacy() {
           </div>
         </div>
       </SoftCard>
-    </GraphicStage>
+    </AtmosphericStage>
   );
 }
 
 export function GraphicStatStudents() {
   return (
-    <GraphicStage className="aspect-[4/3] w-full">
-      <div className="text-center">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.warmSky.src}
+      className="aspect-[4/3] w-full"
+    >
+      <SoftCard className="px-6 py-5 text-center">
         <p className="text-[40px] font-medium leading-none tracking-tight text-[#161514]">
           {SITE.impact.students}
         </p>
         <p className="mt-2 text-[13px] text-[#717071]">students reached</p>
-      </div>
-    </GraphicStage>
+      </SoftCard>
+    </AtmosphericStage>
   );
 }
 
@@ -219,7 +263,10 @@ export function GraphicStatCountries() {
   const heights = [40, 55, 48, 70, 62, 80, 58, 74, 88];
 
   return (
-    <GraphicStage className="aspect-[4/3] w-full">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.dusk.src}
+      className="aspect-[4/3] w-full"
+    >
       <SoftCard className="w-[78%] max-w-[220px] p-4">
         <MutedLabel>Reach</MutedLabel>
         <div className="mt-3">
@@ -235,7 +282,7 @@ export function GraphicStatCountries() {
           ))}
         </div>
       </SoftCard>
-    </GraphicStage>
+    </AtmosphericStage>
   );
 }
 
@@ -243,7 +290,10 @@ export function GraphicStatVolunteers() {
   const avatarColors = ["#d9d4cc", "#c5d0c8", "#c8c4d4", "#d4c8c0"];
 
   return (
-    <GraphicStage className="aspect-[4/3] w-full">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.softField.src}
+      className="aspect-[4/3] w-full"
+    >
       <SoftCard className="w-[78%] max-w-[220px] p-4">
         <MutedLabel>Team</MutedLabel>
         <div className="mt-3">
@@ -259,7 +309,7 @@ export function GraphicStatVolunteers() {
           ))}
         </div>
       </SoftCard>
-    </GraphicStage>
+    </AtmosphericStage>
   );
 }
 
@@ -390,32 +440,6 @@ const PATTERN_ACCENTS = {
     },
   },
 } as const;
-
-/** Atmospheric stage for program flow cards (Natural-inspired, unique palette) */
-export function ProgramFlowStage({ children }: { children: ReactNode }) {
-  return (
-    <div
-      className="relative flex min-h-[340px] w-full items-center justify-center overflow-hidden rounded-[2px] px-5 py-10 sm:min-h-[420px] sm:px-8 sm:py-14 md:min-h-[460px]"
-      style={{
-        backgroundColor: "#1c2430",
-        backgroundImage: [
-          `radial-gradient(ellipse 80% 60% at 20% 30%, rgba(204,155,76,0.35), transparent 55%)`,
-          `radial-gradient(ellipse 70% 50% at 85% 70%, rgba(120,160,190,0.28), transparent 50%)`,
-          `radial-gradient(ellipse 50% 40% at 50% 100%, rgba(255,255,255,0.08), transparent 45%)`,
-          `url("data:image/svg+xml,${encodeURIComponent(
-            `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
-              <filter id='grain'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter>
-              <rect width='200' height='200' filter='url(%23grain)' opacity='0.18'/>
-            </svg>`,
-          )}")`,
-        ].join(", "),
-        backgroundSize: "cover, cover, cover, 180px 180px",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
 
 export function ProgramCardEducation() {
   const topics = [
