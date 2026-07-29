@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   BookOpen01Icon,
   CodeIcon,
@@ -11,8 +11,12 @@ import {
 } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
 import {
-  GraphicProgramsHero,
   GraphicStage,
+  ProgramCardAdvocacy,
+  ProgramCardEducation,
+  ProgramCardSeminars,
+  ProgramCardVolunteers,
+  ProgramFlowStage,
   SoftCard,
 } from "@/components/home/graphics";
 import { TextLink } from "@/components/home/primitives";
@@ -66,13 +70,21 @@ const DEPARTMENT_VISUALS: Record<string, DepartmentVisual> = {
   },
 };
 
+const PROGRAM_CARDS: Record<string, ReactNode> = {
+  education: <ProgramCardEducation />,
+  seminars: <ProgramCardSeminars />,
+  advocacy: <ProgramCardAdvocacy />,
+  volunteers: <ProgramCardVolunteers />,
+};
+
 export function ProgramsShowcase({ tabs }: { tabs: readonly ProgramTab[] }) {
   const [activeId, setActiveId] = useState(tabs[0]?.id ?? "");
   const current = tabs.find((tab) => tab.id === activeId) ?? tabs[0];
+  const card = PROGRAM_CARDS[current?.id ?? ""] ?? <ProgramCardEducation />;
 
   return (
     <div>
-      <GraphicProgramsHero />
+      <ProgramFlowStage>{card}</ProgramFlowStage>
 
       <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {tabs.map((tab) => {

@@ -98,13 +98,14 @@ export default function Home() {
         </div>
 
         <div className="flex flex-1 items-center justify-center content-gutter-x pb-[74px]">
-          <div className="flex h-12 w-12 items-center justify-center bg-[#e8e8e8]">
+          <div className="flex h-14 w-14 items-center justify-center bg-[#cc9b4c] p-2.5">
             <Image
-              src="/bbf-black.svg"
+              src="/bbf-white.svg"
               alt="Budget Bridge Foundation"
-              width={48}
-              height={48}
-              className="h-12 w-12"
+              width={36}
+              height={36}
+              className="h-full w-full"
+              priority
             />
           </div>
         </div>

@@ -169,28 +169,6 @@ export function GraphicFounders() {
   );
 }
 
-export function GraphicProgramsHero() {
-  const { students, countries, volunteers } = SITE.impact;
-
-  return (
-    <GraphicStage className="aspect-[16/9] w-full min-h-[320px] md:min-h-[420px]">
-      <SoftCard className="w-[min(88%,320px)] p-5">
-        <MutedLabel>Our impact</MutedLabel>
-        <p className="mt-2 text-[32px] font-medium leading-none tracking-tight text-[#161514]">
-          {students}
-        </p>
-        <p className="mt-2 text-[14px] text-[#717071]">students reached</p>
-        <div className="mt-5 flex items-center justify-between border-t border-[#f0f0f0] pt-4">
-          <span className="text-[13px] text-[#161514]">{countries} countries</span>
-          <span className="text-[13px] text-[#717071]">
-            {volunteers} volunteers
-          </span>
-        </div>
-      </SoftCard>
-    </GraphicStage>
-  );
-}
-
 export function GraphicAdvocacy() {
   return (
     <GraphicStage className="aspect-square w-full min-h-[280px]">
@@ -291,88 +269,297 @@ type LayeredHighlightProps = {
   pattern?: "waves" | "grid" | "grain";
 };
 
-/** Natural-style layered collage: photo over patterned offset squares */
+/** Natural-style layered collage inside a gray stage */
 export function LayeredHighlight({
   src,
   alt,
   pattern = "waves",
 }: LayeredHighlightProps) {
+  const accents = PATTERN_ACCENTS[pattern ?? "waves"];
+
   return (
-    <div className="relative aspect-[5/4] w-full">
-      <div
-        aria-hidden
-        className="absolute bottom-[4%] left-[2%] h-[72%] w-[72%] overflow-hidden rounded-[2px] bg-[#d8d8d8]"
-        style={{ backgroundImage: MARBLE_PATTERN, backgroundSize: "cover" }}
-      />
-      <div
-        aria-hidden
-        className="absolute right-[2%] top-[4%] h-[58%] w-[58%] overflow-hidden rounded-[2px] bg-[#ececec]"
-        style={patternBackground(pattern)}
-      />
-      <div className="absolute inset-[12%] overflow-hidden rounded-[2px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 33vw"
+    <GraphicStage className="aspect-[5/4] w-full p-4 sm:p-5">
+      <div className="relative h-full w-full min-h-[200px]">
+        <div
+          aria-hidden
+          className="absolute bottom-[2%] left-[1%] h-[74%] w-[74%] overflow-hidden rounded-[2px]"
+          style={accents.back}
         />
+        <div
+          aria-hidden
+          className="absolute right-[1%] top-[2%] h-[60%] w-[60%] overflow-hidden rounded-[2px]"
+          style={accents.front}
+        />
+        <div className="absolute inset-[14%] overflow-hidden rounded-[2px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        </div>
       </div>
+    </GraphicStage>
+  );
+}
+
+const PATTERN_ACCENTS = {
+  waves: {
+    back: {
+      backgroundColor: "#1a1a1a",
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
+          <defs>
+            <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.8 0 0 0 0 0.6 0 0 0 0 0.3 0 0 0 0.35 0'/></filter>
+          </defs>
+          <rect width='200' height='200' fill='#1a1a1a'/>
+          <rect width='200' height='200' filter='url(%23n)'/>
+        </svg>`,
+      )}")`,
+      backgroundSize: "cover",
+    },
+    front: {
+      backgroundColor: "#cc9b4c",
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'>
+          <rect width='160' height='160' fill='#cc9b4c'/>
+          <g fill='none' stroke='%23e8d4a8' stroke-width='1.4' opacity='0.85'>
+            <path d='M-10 20 Q40 0 90 20 T190 20'/>
+            <path d='M-10 40 Q40 20 90 40 T190 40'/>
+            <path d='M-10 60 Q40 40 90 60 T190 60'/>
+            <path d='M-10 80 Q40 60 90 80 T190 80'/>
+            <path d='M-10 100 Q40 80 90 100 T190 100'/>
+            <path d='M-10 120 Q40 100 90 120 T190 120'/>
+            <path d='M-10 140 Q40 120 90 140 T190 140'/>
+          </g>
+        </svg>`,
+      )}")`,
+      backgroundSize: "cover",
+    },
+  },
+  grid: {
+    back: {
+      backgroundColor: "#cc9b4c",
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+          <filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/></filter>
+          <rect width='120' height='120' fill='#b8893f'/>
+          <rect width='120' height='120' filter='url(%23g)' opacity='0.4'/>
+        </svg>`,
+      )}")`,
+      backgroundSize: "cover",
+    },
+    front: {
+      backgroundColor: "#2a2a2a",
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'>
+          <rect width='18' height='18' fill='#2a2a2a'/>
+          <path d='M18 0H0v18' fill='none' stroke='%23cc9b4c' stroke-width='1' opacity='0.55'/>
+        </svg>`,
+      )}")`,
+      backgroundSize: "18px 18px",
+    },
+  },
+  grain: {
+    back: {
+      backgroundColor: "#ececec",
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+          <filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter>
+          <rect width='120' height='120' fill='#d8d4cc'/>
+          <rect width='120' height='120' filter='url(%23g)' opacity='0.45'/>
+        </svg>`,
+      )}")`,
+      backgroundSize: "cover",
+    },
+    front: {
+      backgroundColor: "#161514",
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'>
+          <rect width='160' height='160' fill='#161514'/>
+          <g fill='none' stroke='%23cc9b4c' stroke-width='1.2' opacity='0.7'>
+            <circle cx='40' cy='40' r='28'/>
+            <circle cx='110' cy='55' r='18'/>
+            <circle cx='70' cy='115' r='34'/>
+            <circle cx='130' cy='120' r='14'/>
+          </g>
+        </svg>`,
+      )}")`,
+      backgroundSize: "cover",
+    },
+  },
+} as const;
+
+/** Atmospheric stage for program flow cards (Natural-inspired, unique palette) */
+export function ProgramFlowStage({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className="relative flex min-h-[340px] w-full items-center justify-center overflow-hidden rounded-[2px] px-5 py-10 sm:min-h-[420px] sm:px-8 sm:py-14 md:min-h-[460px]"
+      style={{
+        backgroundColor: "#1c2430",
+        backgroundImage: [
+          `radial-gradient(ellipse 80% 60% at 20% 30%, rgba(204,155,76,0.35), transparent 55%)`,
+          `radial-gradient(ellipse 70% 50% at 85% 70%, rgba(120,160,190,0.28), transparent 50%)`,
+          `radial-gradient(ellipse 50% 40% at 50% 100%, rgba(255,255,255,0.08), transparent 45%)`,
+          `url("data:image/svg+xml,${encodeURIComponent(
+            `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
+              <filter id='grain'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter>
+              <rect width='200' height='200' filter='url(%23grain)' opacity='0.18'/>
+            </svg>`,
+          )}")`,
+        ].join(", "),
+        backgroundSize: "cover, cover, cover, 180px 180px",
+      }}
+    >
+      {children}
     </div>
   );
 }
 
-const MARBLE_PATTERN = `url("data:image/svg+xml,${encodeURIComponent(
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
-    <defs>
-      <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.55 0 0 0 0 0.55 0 0 0 0.55 0'/></filter>
-    </defs>
-    <rect width='200' height='200' fill='#cfcfcf'/>
-    <rect width='200' height='200' filter='url(%23n)' opacity='0.85'/>
-  </svg>`,
-)}")`;
+export function ProgramCardEducation() {
+  const topics = [
+    { label: "Budgeting", tone: "from-[#f0c078] to-[#cc9b4c]" },
+    { label: "Saving", tone: "from-[#9bb8d4] to-[#6a8fb0]" },
+    { label: "Credit", tone: "from-[#c5b0d4] to-[#8f7aa8]" },
+    { label: "Investing", tone: "from-[#b8d4c0] to-[#7aa890]" },
+  ];
 
-function patternBackground(pattern: LayeredHighlightProps["pattern"]) {
-  if (pattern === "grid") {
-    return {
-      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
-        `<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'>
-          <path d='M16 0H0v16' fill='none' stroke='%23bdbdbd' stroke-width='1'/>
-        </svg>`,
-      )}")`,
-      backgroundSize: "16px 16px",
-    } as const;
-  }
+  return (
+    <SoftCard className="w-full max-w-[340px] p-5 sm:p-6">
+      <MutedLabel>Live tutoring</MutedLabel>
+      <p className="mt-2 text-[22px] font-medium text-[#161514]">
+        Ages 10–16
+      </p>
+      <p className="mt-1 text-[13px] text-[#717071]">Session in progress</p>
+      <ul className="mt-5 grid grid-cols-2 gap-2">
+        {topics.map((topic) => (
+          <li
+            key={topic.label}
+            className="flex items-center gap-2 rounded-[8px] bg-[#fafafa] px-2.5 py-2"
+          >
+            <span
+              className={`h-7 w-7 shrink-0 rounded-[6px] bg-gradient-to-br ${topic.tone}`}
+            />
+            <span className="text-[13px] font-medium text-[#161514]">
+              {topic.label}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-5 flex items-center justify-between border-t border-[#f0f0f0] pt-4">
+        <span className="text-[12px] text-[#a3a3a3]">NGO partners</span>
+        <span className="text-[13px] font-medium text-[#161514]">
+          Latin America · Africa · Asia
+        </span>
+      </div>
+    </SoftCard>
+  );
+}
 
-  if (pattern === "grain") {
-    return {
-      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
-        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
-          <filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/></filter>
-          <rect width='120' height='120' fill='#e4e4e4'/>
-          <rect width='120' height='120' filter='url(%23g)' opacity='0.35'/>
-        </svg>`,
-      )}")`,
-      backgroundSize: "cover",
-    } as const;
-  }
+export function ProgramCardSeminars() {
+  return (
+    <SoftCard className="w-full max-w-[340px] p-5 sm:p-6">
+      <MutedLabel>School seminar</MutedLabel>
+      <p className="mt-2 text-[20px] font-medium leading-snug text-[#161514]">
+        Personal finance basics
+      </p>
+      <div className="mt-5 space-y-3">
+        {[
+          { step: "01", title: "What is a budget?", tone: "bg-[#cc9b4c]" },
+          { step: "02", title: "Saving vs. spending", tone: "bg-[#6a8fb0]" },
+          { step: "03", title: "Needs and wants", tone: "bg-[#8f7aa8]" },
+        ].map((item) => (
+          <div key={item.step} className="flex items-center gap-3">
+            <span
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] text-[11px] font-medium text-white ${item.tone}`}
+            >
+              {item.step}
+            </span>
+            <span className="text-[14px] text-[#161514]">{item.title}</span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 text-[12px] text-[#a3a3a3]">
+        Free for elementary & middle schools
+      </p>
+    </SoftCard>
+  );
+}
 
-  return {
-    backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
-      `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'>
-        <rect width='160' height='160' fill='#e8e8e8'/>
-        <g fill='none' stroke='%23b5b5b5' stroke-width='1.2'>
-          <path d='M-10 20 Q40 0 90 20 T190 20'/>
-          <path d='M-10 40 Q40 20 90 40 T190 40'/>
-          <path d='M-10 60 Q40 40 90 60 T190 60'/>
-          <path d='M-10 80 Q40 60 90 80 T190 80'/>
-          <path d='M-10 100 Q40 80 90 100 T190 100'/>
-          <path d='M-10 120 Q40 100 90 120 T190 120'/>
-          <path d='M-10 140 Q40 120 90 140 T190 140'/>
-        </g>
-      </svg>`,
-    )}")`,
-    backgroundSize: "cover",
-  } as const;
+export function ProgramCardAdvocacy() {
+  return (
+    <SoftCard className="w-full max-w-[340px] p-5 sm:p-6">
+      <MutedLabel>Policy track</MutedLabel>
+      <p className="mt-2 text-[20px] font-medium text-[#161514]">
+        Close the loophole
+      </p>
+      <div className="mt-5 space-y-3">
+        <div className="rounded-[8px] bg-[#fafafa] px-3 py-3">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[13px] font-medium text-[#161514]">
+              Senate Bill 3497
+            </span>
+            <span className="rounded-[4px] bg-[#cc9b4c]/20 px-2 py-0.5 text-[11px] font-medium text-[#8a6828]">
+              Active
+            </span>
+          </div>
+        </div>
+        <div className="rounded-[8px] bg-[#fafafa] px-3 py-3">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[13px] font-medium text-[#161514]">
+              Assembly Bill A4764
+            </span>
+            <span className="rounded-[4px] bg-[#6a8fb0]/20 px-2 py-0.5 text-[11px] font-medium text-[#3d5a73]">
+              Active
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="mt-5 flex items-center gap-2 border-t border-[#f0f0f0] pt-4">
+        <span className="flex h-6 w-6 items-center justify-center rounded-[4px] bg-gradient-to-br from-[#cc9b4c] to-[#8a6828] text-[10px] text-white">
+          ✓
+        </span>
+        <span className="text-[13px] text-[#717071]">
+          BOE testimony in Randolph & Parsippany
+        </span>
+      </div>
+    </SoftCard>
+  );
+}
+
+export function ProgramCardVolunteers() {
+  const depts = [
+    { label: "Social", tone: "from-[#f09433] via-[#dc2743] to-[#bc1888]" },
+    { label: "Outreach", tone: "from-[#9bb8d4] to-[#6a8fb0]" },
+    { label: "Curriculum", tone: "from-[#cc9b4c] to-[#a67c38]" },
+    { label: "Research", tone: "from-[#c5b0d4] to-[#8f7aa8]" },
+    { label: "Policy", tone: "from-[#b8d4c0] to-[#7aa890]" },
+    { label: "Tech", tone: "from-[#161514] to-[#4a4a4a]" },
+  ];
+
+  return (
+    <SoftCard className="w-full max-w-[340px] p-5 sm:p-6">
+      <MutedLabel>Join a team</MutedLabel>
+      <p className="mt-2 text-[20px] font-medium text-[#161514]">
+        Volunteer departments
+      </p>
+      <ul className="mt-5 grid grid-cols-2 gap-2">
+        {depts.map((dept) => (
+          <li
+            key={dept.label}
+            className="flex items-center gap-2 rounded-[8px] bg-[#fafafa] px-2.5 py-2"
+          >
+            <span
+              className={`h-6 w-6 shrink-0 rounded-[5px] bg-gradient-to-br ${dept.tone}`}
+            />
+            <span className="text-[13px] font-medium text-[#161514]">
+              {dept.label}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </SoftCard>
+  );
 }
 
