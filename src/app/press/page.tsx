@@ -28,13 +28,15 @@ export default function PressPage() {
                 href={card.href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noreferrer" : undefined}
-                className={`flex min-h-[340px] min-w-[260px] flex-col justify-between rounded-[2px] p-7 text-white md:min-w-0 ${card.tone}`}
+                className={`group flex min-h-[340px] min-w-[260px] flex-col justify-between rounded-[2px] p-7 text-white transition-[transform,filter] duration-300 ease-out hover:-translate-y-1 hover:brightness-110 md:min-w-0 ${card.tone}`}
               >
                 <p className="text-[13px] text-white/70">{card.outlet}</p>
                 <p className="text-[18px] font-medium leading-7 text-white">
                   {card.title}
                 </p>
-                <span className="text-[13px] text-white/70">Read →</span>
+                <span className="text-[13px] text-white/70 transition-transform duration-300 group-hover:translate-x-1">
+                  Read →
+                </span>
               </a>
             );
           })}

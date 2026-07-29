@@ -12,7 +12,6 @@ import {
 import { AccentButton } from "@/components/AccentButton";
 import {
   AtmosphericStage,
-  GraphicStage,
   ProgramCardAdvocacy,
   ProgramCardEducation,
   ProgramCardSeminars,
@@ -85,9 +84,12 @@ export function ProgramsShowcase({ tabs }: { tabs: readonly ProgramTab[] }) {
 
   return (
     <div>
-      <GraphicStage className="aspect-[16/9] w-full min-h-[320px] md:min-h-[420px]">
+      <AtmosphericStage
+        atmosphere={MEDIA.atmospheres.curtains.src}
+        className="aspect-[16/9] w-full min-h-[320px] md:min-h-[420px]"
+      >
         {card}
-      </GraphicStage>
+      </AtmosphericStage>
 
       <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {tabs.map((tab) => {
@@ -137,7 +139,7 @@ export function InvolvedShowcase({
       </p>
 
       <AtmosphericStage
-        atmosphere={MEDIA.atmospheres.curtains.src}
+        atmosphere={MEDIA.atmospheres.wildflowers.src}
         className="relative min-h-[400px] sm:min-h-[440px]"
       >
         <SoftCard className="relative z-10 w-full max-w-[560px] p-5 sm:p-6">

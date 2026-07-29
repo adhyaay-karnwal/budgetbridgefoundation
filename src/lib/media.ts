@@ -54,6 +54,18 @@ export const MEDIA = {
       src: "/media/atmospheres/atmosphere-07.jpg",
       alt: "",
     },
+    ocean: {
+      src: "/media/atmospheres/atmosphere-08.jpg",
+      alt: "",
+    },
+    mountains: {
+      src: "/media/atmospheres/atmosphere-09.jpg",
+      alt: "",
+    },
+    wildflowers: {
+      src: "/media/atmospheres/atmosphere-10.jpg",
+      alt: "",
+    },
   },
   highlights: {
     story: {

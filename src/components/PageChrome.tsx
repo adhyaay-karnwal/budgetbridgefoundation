@@ -15,7 +15,7 @@ export function PageSection({
   id,
 }: PageSectionProps) {
   return (
-    <section id={id} className={className}>
+    <section id={id} className={`page-enter-body ${className}`.trim()}>
       {children}
     </section>
   );
@@ -37,18 +37,33 @@ export function PageHero({
   children,
 }: PageHeroProps) {
   return (
-    <PageSection className={className}>
-      <p className="mb-4 text-[15px] leading-6 text-[#a3a3a3]">{label}</p>
-      <h1 className="max-w-3xl text-[40px] font-medium leading-[1.15] tracking-tight text-[#111400]">
+    <section className={className}>
+      <p className="page-enter-text mb-4 text-[15px] leading-6 text-[#a3a3a3]">
+        {label}
+      </p>
+      <h1 className="page-enter-text-delay max-w-3xl text-[40px] font-medium leading-[1.15] tracking-tight text-[#111400]">
         {title}
       </h1>
       {description ? (
-        <p className="mt-6 max-w-2xl text-[17px] leading-7 text-[#717071]">
+        <p className="page-enter-body mt-6 max-w-2xl text-[17px] leading-7 text-[#717071]">
           {description}
         </p>
       ) : null}
-      {children}
-    </PageSection>
+      {children ? <div className="page-enter-body">{children}</div> : null}
+    </section>
+  );
+}
+
+/** Rest of page after hero — enters shortly after title */
+export function PageBody({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`page-enter-body ${className}`.trim()}>{children}</div>
   );
 }
 

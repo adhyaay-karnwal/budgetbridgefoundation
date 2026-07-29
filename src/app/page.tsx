@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
+import { Tick02Icon } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
+import { HomeHero } from "@/components/home/HomeHero";
 import {
   InvolvedShowcase,
   ProgramsShowcase,
@@ -27,7 +28,7 @@ import {
 import { Icon } from "@/components/Icon";
 import { getBlogPost } from "@/lib/content";
 import { MEDIA } from "@/lib/media";
-import { HERO, HOME } from "@/lib/site";
+import { HOME } from "@/lib/site";
 
 const featuredBlog = getBlogPost(HOME.blog.featuredSlug);
 
@@ -79,48 +80,7 @@ function CtaRow({
 export default function Home() {
   return (
     <main className="bg-white">
-      {/* 01 Hero */}
-      <section className="-mt-20 flex min-h-dvh flex-col pt-20">
-        <div className="mt-20 content-gutter-x">
-          <Link
-            href={HERO.announcement.href}
-            className="inline-flex items-center gap-3 rounded px-2 py-0.5 text-[15px] leading-7 text-[#161514] bg-[#f6f6f6]"
-          >
-            <span>{HERO.announcement.title}</span>
-            <span className="text-[#717071]">{HERO.announcement.date}</span>
-            <Icon
-              icon={ArrowRight01Icon}
-              size={25}
-              className="shrink-0 text-[#161514]"
-              aria-hidden
-            />
-          </Link>
-        </div>
-
-        <div className="flex flex-1 items-center justify-center content-gutter-x pb-[74px]">
-          <div className="flex h-14 w-14 items-center justify-center bg-[#cc9b4c] p-2.5">
-            <Image
-              src="/bbf-white.svg"
-              alt="Budget Bridge Foundation"
-              width={36}
-              height={36}
-              className="h-full w-full"
-              priority
-            />
-          </div>
-        </div>
-
-        <div className="content-gutter-x pb-[80px]">
-          <h1 className="w-full max-w-none text-[40px] font-normal leading-[56px] text-[#111400]">
-            <span>{HERO.headline} </span>
-            <span className="text-[#d7d6d4]">{HERO.muted}</span>
-          </h1>
-          <CtaRow
-            primary={HERO.primaryCta}
-            secondary={HERO.secondaryCta}
-          />
-        </div>
-      </section>
+      <HomeHero />
 
       {/* 02 Mission + founders */}
       <HomeSection className="content-gutter-x pb-32 pt-28">
@@ -251,13 +211,15 @@ export default function Home() {
                 {...(external
                   ? { target: "_blank", rel: "noreferrer" }
                   : {})}
-                className={`flex min-h-[340px] min-w-[260px] flex-col justify-between rounded-[2px] p-7 text-white md:min-w-0 ${card.tone}`}
+                className={`group flex min-h-[340px] min-w-[260px] flex-col justify-between rounded-[2px] p-7 text-white transition-[transform,filter] duration-300 ease-out hover:-translate-y-1 hover:brightness-110 md:min-w-0 ${card.tone}`}
               >
                 <p className="text-[13px] text-white/70">{card.outlet}</p>
                 <p className="text-[18px] font-medium leading-7 text-white">
                   {card.title}
                 </p>
-                <span className="text-[13px] text-white/70">Read →</span>
+                <span className="text-[13px] text-white/70 transition-transform duration-300 group-hover:translate-x-1">
+                  Read →
+                </span>
               </a>
             );
           })}

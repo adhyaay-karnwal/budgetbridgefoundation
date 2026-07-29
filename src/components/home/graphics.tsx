@@ -113,7 +113,7 @@ export function GraphicCurriculum() {
 
   return (
     <AtmosphericStage
-      atmosphere={MEDIA.atmospheres.clouds.src}
+      atmosphere={MEDIA.atmospheres.ocean.src}
       className="aspect-[4/3] w-full"
     >
       <SoftCard className="w-[78%] max-w-[240px] p-4">
@@ -173,7 +173,7 @@ export function GraphicTutoring() {
 export function GraphicGameClass() {
   return (
     <AtmosphericStage
-      atmosphere={MEDIA.atmospheres.curtains.src}
+      atmosphere={MEDIA.atmospheres.clouds.src}
       className="aspect-[4/3] w-full"
     >
       <div className="relative mx-auto w-[86%] max-w-[280px] overflow-hidden rounded-[10px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
@@ -189,11 +189,14 @@ export function GraphicGameClass() {
   );
 }
 
-/** Founders photo on gray stage (background image can be added later) */
+/** Founders photo on atmospheric stage for Mission */
 export function GraphicFounders() {
   return (
-    <GraphicStage className="aspect-[5/4] w-full min-h-[260px] lg:aspect-auto lg:min-h-[320px]">
-      <div className="relative mx-auto aspect-[4/3] w-[82%] max-w-[340px] overflow-hidden rounded-[10px]">
+    <AtmosphericStage
+      atmosphere={MEDIA.atmospheres.mountains.src}
+      className="aspect-[5/4] w-full min-h-[260px] lg:aspect-auto lg:min-h-[320px]"
+    >
+      <div className="relative mx-auto aspect-[4/3] w-[82%] max-w-[340px] overflow-hidden rounded-[10px] shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
         <Image
           src={MEDIA.founders.group.src}
           alt="Budget Bridge founders"
@@ -203,7 +206,7 @@ export function GraphicFounders() {
           priority
         />
       </div>
-    </GraphicStage>
+    </AtmosphericStage>
   );
 }
 
@@ -332,12 +335,12 @@ export function LayeredHighlight({
       <div className="relative h-full w-full min-h-[200px]">
         <div
           aria-hidden
-          className="absolute bottom-[2%] left-[1%] h-[74%] w-[74%] overflow-hidden rounded-[2px]"
+          className="absolute bottom-[2%] left-[1%] h-[74%] w-[74%] overflow-hidden rounded-[2px] transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           style={accents.back}
         />
         <div
           aria-hidden
-          className="absolute right-[1%] top-[2%] h-[60%] w-[60%] overflow-hidden rounded-[2px]"
+          className="absolute right-[1%] top-[2%] h-[60%] w-[60%] overflow-hidden rounded-[2px] transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           style={accents.front}
         />
         <div className="absolute inset-[14%] overflow-hidden rounded-[2px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
@@ -345,7 +348,7 @@ export function LayeredHighlight({
             src={src}
             alt={alt}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>

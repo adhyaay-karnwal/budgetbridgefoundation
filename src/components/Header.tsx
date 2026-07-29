@@ -10,10 +10,12 @@ import {
 } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
 import { Icon } from "@/components/Icon";
+import { useIntro } from "@/components/intro/IntroProvider";
 import { NAV, type NavItem } from "@/lib/site";
 
 export default function Header() {
   const pathname = usePathname();
+  const { phase, showChrome, returnHome } = useIntro();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [renderedMenu, setRenderedMenu] = useState<string | null>(null);
@@ -68,10 +70,16 @@ export default function Header() {
   );
   const isPanelOpen = openMenu !== null;
 
+  let introChrome = "pointer-events-none opacity-0";
+  if (phase === "chrome") {
+    introChrome = returnHome ? "home-nav-enter-fast" : "home-nav-enter";
+  } else if (showChrome) introChrome = "";
+
   return (
     <header
-      className="sticky top-0 z-50"
+      className={`sticky top-0 z-50 ${introChrome}`}
       onMouseLeave={scheduleClose}
+      data-intro-chrome={showChrome ? "visible" : "hidden"}
     >
       <div className="relative z-20 bg-white/75 backdrop-blur-[10px] supports-[backdrop-filter]:bg-white/75">
         <div className="relative flex h-20 items-center content-gutter-x">
