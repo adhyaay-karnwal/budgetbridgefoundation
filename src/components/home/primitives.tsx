@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { OutboundLink } from "@/components/OutboundLink";
 
 type WithChildren = {
   children: ReactNode;
@@ -41,19 +41,7 @@ export function SectionHeading({ children }: WithChildren) {
   );
 }
 
-export function TextLink({
-  href,
-  children,
-}: WithChildren & { href: string }) {
-  return (
-    <Link
-      href={href}
-      className="text-[15px] leading-6 text-[#161514] transition-colors hover:text-[#717071]"
-    >
-      {children}
-    </Link>
-  );
-}
+export { OutboundLink as TextLink };
 
 type FeatureCardProps = {
   title: string;

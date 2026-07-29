@@ -15,13 +15,18 @@ export type NavItem =
 
 /**
  * Top-level nav mirrors natural.com density.
- * Menu labels are hover-only (not links). Nested items are the real pages.
+ * Mega-menus only when there are multiple real pages under a label.
  */
 export const NAV: NavItem[] = [
   {
     label: "Programs",
     kind: "menu",
     items: [
+      {
+        title: "Overview",
+        description: "How Budget Bridge reaches students worldwide",
+        href: "/programs",
+      },
       {
         title: "Education",
         description: "Live tutoring, workshops, and curriculum",
@@ -32,34 +37,9 @@ export const NAV: NavItem[] = [
         description: "Free sessions for elementary and middle schools",
         href: "/programs/seminars",
       },
-      {
-        title: "Overview",
-        description: "How Budget Bridge reaches students worldwide",
-        href: "/programs",
-      },
     ],
   },
-  {
-    label: "Advocacy",
-    kind: "menu",
-    items: [
-      {
-        title: "Policy",
-        description: "Standalone personal finance in every school",
-        href: "/advocacy",
-      },
-      {
-        title: "Legislation",
-        description: "S3497 and A4764 in New Jersey",
-        href: "/advocacy#legislation",
-      },
-      {
-        title: "Board testimony",
-        description: "Randolph and Parsippany BOE speeches",
-        href: "/advocacy#testimony",
-      },
-    ],
-  },
+  { label: "Advocacy", href: "/advocacy", kind: "link" },
   {
     label: "About",
     kind: "menu",
@@ -68,11 +48,6 @@ export const NAV: NavItem[] = [
         title: "Our story",
         description: "How four students started Budget Bridge",
         href: "/about",
-      },
-      {
-        title: "Team",
-        description: "Meet the founders",
-        href: "/about#team",
       },
       {
         title: "Press",
@@ -94,24 +69,19 @@ export const FOOTER_COLUMNS = [
   {
     title: "Programs",
     links: [
+      { label: "Overview", href: "/programs" },
       { label: "Education", href: "/programs/education" },
       { label: "Seminars", href: "/programs/seminars" },
-      { label: "Overview", href: "/programs" },
     ],
   },
   {
     title: "Advocacy",
-    links: [
-      { label: "Policy", href: "/advocacy" },
-      { label: "Legislation", href: "/advocacy#legislation" },
-      { label: "Board testimony", href: "/advocacy#testimony" },
-    ],
+    links: [{ label: "Policy & Advocacy", href: "/advocacy" }],
   },
   {
     title: "About",
     links: [
       { label: "Our story", href: "/about" },
-      { label: "Team", href: "/about#team" },
       { label: "Press", href: "/press" },
       { label: "Blog", href: "/blog" },
       { label: "Get Involved", href: "/get-involved" },
@@ -125,6 +95,7 @@ export const FOOTER_COLUMNS = [
         label: "Instagram",
         href: "https://www.instagram.com/budgetbridgefoundation/",
         external: true,
+        variant: "instagram" as const,
       },
       {
         label: "Email",
@@ -309,28 +280,33 @@ export const HOME = {
       },
     ],
   },
+  /** Featured post slug — cover image always comes from BLOG.posts */
   blog: {
     label: "Blog",
-    heading: "Politics, economics & your money",
-    href: "/blog/political-economic-personal-finance",
-    date: "Sep 21",
+    featuredSlug: "political-economic-personal-finance",
   },
   highlights: {
     items: [
       {
+        id: "story" as const,
         title: "Our story",
         date: "About",
         href: "/about",
+        pattern: "waves" as const,
       },
       {
+        id: "volunteer" as const,
         title: "Volunteer",
         date: "Join",
         href: "/get-involved",
+        pattern: "grid" as const,
       },
       {
+        id: "advocacy" as const,
         title: "Advocacy",
         date: "Policy",
         href: "/advocacy",
+        pattern: "grain" as const,
       },
     ],
   },

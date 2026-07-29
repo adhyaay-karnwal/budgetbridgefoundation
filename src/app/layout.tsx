@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { PageEnd } from "@/components/PageEnd";
 import "./globals.css";
 
 const acuminPro = localFont({
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col font-sans">
         <Header />
         <div className="flex-1">{children}</div>
+        <PageEnd />
         <Footer />
       </body>
     </html>

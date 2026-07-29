@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { MEDIA } from "@/lib/media";
 import { SITE } from "@/lib/site";
 
 type StageProps = {
@@ -139,7 +140,7 @@ export function GraphicGameClass() {
     <GraphicStage className="aspect-[4/3] w-full">
       <div className="relative mx-auto w-[86%] max-w-[280px] overflow-hidden rounded-[10px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
         <Image
-          src="/images/gameclass-ss-1.png"
+          src={MEDIA.programs.gameclass.src}
           alt="GameClass lessons dashboard"
           width={3978}
           height={2265}
@@ -156,7 +157,7 @@ export function GraphicFounders() {
     <GraphicStage className="aspect-[5/4] w-full min-h-[260px] lg:aspect-auto lg:min-h-[320px]">
       <div className="relative mx-auto aspect-[4/3] w-[82%] max-w-[340px] overflow-hidden rounded-[10px]">
         <Image
-          src="/images/founders-pic.jpg"
+          src={MEDIA.founders.group.src}
           alt="Budget Bridge founders"
           fill
           className="object-cover"
@@ -282,5 +283,96 @@ export function GraphicStatVolunteers() {
       </SoftCard>
     </GraphicStage>
   );
+}
+
+type LayeredHighlightProps = {
+  src: string;
+  alt: string;
+  pattern?: "waves" | "grid" | "grain";
+};
+
+/** Natural-style layered collage: photo over patterned offset squares */
+export function LayeredHighlight({
+  src,
+  alt,
+  pattern = "waves",
+}: LayeredHighlightProps) {
+  return (
+    <div className="relative aspect-[5/4] w-full">
+      <div
+        aria-hidden
+        className="absolute bottom-[4%] left-[2%] h-[72%] w-[72%] overflow-hidden rounded-[2px] bg-[#d8d8d8]"
+        style={{ backgroundImage: MARBLE_PATTERN, backgroundSize: "cover" }}
+      />
+      <div
+        aria-hidden
+        className="absolute right-[2%] top-[4%] h-[58%] w-[58%] overflow-hidden rounded-[2px] bg-[#ececec]"
+        style={patternBackground(pattern)}
+      />
+      <div className="absolute inset-[12%] overflow-hidden rounded-[2px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+      </div>
+    </div>
+  );
+}
+
+const MARBLE_PATTERN = `url("data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
+    <defs>
+      <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.55 0 0 0 0 0.55 0 0 0 0.55 0'/></filter>
+    </defs>
+    <rect width='200' height='200' fill='#cfcfcf'/>
+    <rect width='200' height='200' filter='url(%23n)' opacity='0.85'/>
+  </svg>`,
+)}")`;
+
+function patternBackground(pattern: LayeredHighlightProps["pattern"]) {
+  if (pattern === "grid") {
+    return {
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'>
+          <path d='M16 0H0v16' fill='none' stroke='%23bdbdbd' stroke-width='1'/>
+        </svg>`,
+      )}")`,
+      backgroundSize: "16px 16px",
+    } as const;
+  }
+
+  if (pattern === "grain") {
+    return {
+      backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+          <filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/></filter>
+          <rect width='120' height='120' fill='#e4e4e4'/>
+          <rect width='120' height='120' filter='url(%23g)' opacity='0.35'/>
+        </svg>`,
+      )}")`,
+      backgroundSize: "cover",
+    } as const;
+  }
+
+  return {
+    backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+      `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'>
+        <rect width='160' height='160' fill='#e8e8e8'/>
+        <g fill='none' stroke='%23b5b5b5' stroke-width='1.2'>
+          <path d='M-10 20 Q40 0 90 20 T190 20'/>
+          <path d='M-10 40 Q40 20 90 40 T190 40'/>
+          <path d='M-10 60 Q40 40 90 60 T190 60'/>
+          <path d='M-10 80 Q40 60 90 80 T190 80'/>
+          <path d='M-10 100 Q40 80 90 100 T190 100'/>
+          <path d='M-10 120 Q40 100 90 120 T190 120'/>
+          <path d='M-10 140 Q40 120 90 140 T190 140'/>
+        </g>
+      </svg>`,
+    )}")`,
+    backgroundSize: "cover",
+  } as const;
 }
 

@@ -16,16 +16,26 @@ import {
   GraphicStatStudents,
   GraphicStatVolunteers,
   GraphicTutoring,
+  LayeredHighlight,
 } from "@/components/home/graphics";
 import {
   FeatureCard,
-  MediaPlaceholder,
   SectionHeading,
   SectionLabel,
   TextLink,
 } from "@/components/home/primitives";
 import { Icon } from "@/components/Icon";
+import { getBlogPost } from "@/lib/content";
+import { MEDIA } from "@/lib/media";
 import { HERO, HOME } from "@/lib/site";
+
+const featuredBlog = getBlogPost(HOME.blog.featuredSlug);
+
+const HIGHLIGHT_MEDIA = {
+  story: MEDIA.highlights.story,
+  volunteer: MEDIA.highlights.volunteer,
+  advocacy: MEDIA.highlights.advocacy,
+} as const;
 
 const BENEFIT_GRAPHICS = {
   curriculum: <GraphicCurriculum />,
@@ -135,14 +145,9 @@ export default function Home() {
               card.id === "gameclass" ? (
                 <>
                   {card.descriptionBefore}
-                  <a
-                    href={card.descriptionLink.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[#161514] no-underline transition-colors hover:text-[#717071]"
-                  >
+                  <TextLink href={card.descriptionLink.href}>
                     {card.descriptionLink.label}
-                  </a>
+                  </TextLink>
                   {card.descriptionAfter}
                 </>
               ) : (
@@ -258,47 +263,56 @@ export default function Home() {
         </div>
       </HomeSection>
 
-      {/* 09 Featured blog */}
-      <HomeSection className="content-gutter-x pb-24 pt-8">
-        <SectionLabel>{HOME.blog.label}</SectionLabel>
-        <Link href={HOME.blog.href} className="group block">
-          <SectionHeading>{HOME.blog.heading}</SectionHeading>
-          <MediaPlaceholder className="mt-12 aspect-[21/9] w-full min-h-[240px]" />
-          <p className="mt-4 text-[15px] text-[#717071] group-hover:text-[#161514]">
-            {HOME.blog.date}
-          </p>
-        </Link>
-      </HomeSection>
+      {/* 09 Featured blog — cover always comes from BLOG.posts */}
+      {featuredBlog ? (
+        <HomeSection className="content-gutter-x pb-24 pt-8">
+          <SectionLabel>{HOME.blog.label}</SectionLabel>
+          <Link href={`/blog/${featuredBlog.slug}`} className="group block">
+            <SectionHeading>{featuredBlog.title}</SectionHeading>
+            <div className="relative mt-12 aspect-[21/9] min-h-[240px] w-full overflow-hidden rounded-[2px] bg-[#ececec]">
+              <Image
+                src={featuredBlog.cover.src}
+                alt={featuredBlog.cover.alt}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                sizes="100vw"
+              />
+            </div>
+            <div className="mt-4 flex flex-wrap items-baseline justify-between gap-3">
+              <p className="max-w-2xl text-[15px] leading-6 text-[#717071]">
+                {featuredBlog.excerpt}
+              </p>
+              <p className="text-[15px] text-[#a3a3a3]">
+                {featuredBlog.dateShort}
+              </p>
+            </div>
+          </Link>
+        </HomeSection>
+      ) : null}
 
-      {/* 10 Highlight cards — photo placeholders for now */}
+      {/* 10 Highlight cards — Natural-style layered collage */}
       <HomeSection>
         <div className="grid gap-8 md:grid-cols-3">
-          {HOME.highlights.items.map((item) => (
-            <Link key={item.href} href={item.href} className="group block">
-              <MediaPlaceholder className="aspect-[5/4] w-full" />
-              <div className="mt-4 flex items-baseline justify-between gap-4">
-                <span className="text-[15px] text-[#161514] transition-colors group-hover:text-[#717071]">
-                  {item.title}
-                </span>
-                <span className="text-[15px] text-[#a3a3a3]">{item.date}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </HomeSection>
+          {HOME.highlights.items.map((item) => {
+            const media = HIGHLIGHT_MEDIA[item.id];
 
-      {/* 11 Closing CTA */}
-      <HomeSection className="content-gutter-x pb-36 pt-16 text-center">
-        <h2 className="text-[40px] font-medium leading-[1.15] tracking-tight text-[#111400]">
-          {HOME.closing.line1}
-          <br />
-          {HOME.closing.line2}
-        </h2>
-        <CtaRow
-          primary={HOME.closing.primaryCta}
-          secondary={HOME.closing.secondaryCta}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
-        />
+            return (
+              <Link key={item.href} href={item.href} className="group block">
+                <LayeredHighlight
+                  src={media.src}
+                  alt={media.alt}
+                  pattern={item.pattern}
+                />
+                <div className="mt-4 flex items-baseline justify-between gap-4">
+                  <span className="text-[15px] text-[#161514] transition-colors group-hover:text-[#717071]">
+                    {item.title}
+                  </span>
+                  <span className="text-[15px] text-[#a3a3a3]">{item.date}</span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </HomeSection>
     </main>
   );
