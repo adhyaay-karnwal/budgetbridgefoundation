@@ -3,34 +3,38 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageSection } from "@/components/PageChrome";
-import { getBlogPost } from "@/lib/content";
+import { BLOG, getBlogPost } from "@/lib/content";
 import { SITE } from "@/lib/site";
 
-const SLUG = "political-economic-personal-finance";
-const post = getBlogPost(SLUG);
-
-export const metadata: Metadata = {
-  title: `${post?.title ?? "Blog"} · ${SITE.name}`,
-  description: post?.excerpt,
+type PageProps = {
+  params: Promise<{ slug: string }>;
 };
 
-export default function BlogPostPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+
+  return {
+    title: `${post?.title ?? "Blog"} · ${SITE.name}`,
+    description: post?.excerpt,
+  };
+}
+
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+
   if (!post) notFound();
 
   return (
     <main className="bg-white">
       <header className="content-gutter-x pb-10 pt-28">
         <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-[#a3a3a3]">
-          Blog
+          {BLOG.label}
         </p>
         <h1 className="mt-4 max-w-4xl text-[36px] font-medium leading-[1.1] tracking-tight text-[#161514] sm:text-[48px]">
           {post.title}
         </h1>
-        <div className="mt-6 flex flex-wrap gap-3 text-[15px] text-[#717071]">
-          <span>{post.author}</span>
-          <span className="text-[#c4c4c4]">·</span>
-          <span>{post.date}</span>
-        </div>
       </header>
 
       <PageSection className="content-gutter-x pb-12 pt-4">
@@ -44,6 +48,11 @@ export default function BlogPostPage() {
             priority
           />
         </div>
+        <div className="mt-6 grid grid-cols-3 items-center gap-4 text-[15px] text-[#717071]">
+          <span>{post.date}</span>
+          <span className="text-center">{post.author}</span>
+          <span className="text-right">{post.category}</span>
+        </div>
       </PageSection>
 
       <PageSection className="content-gutter-x pb-16 pt-4">
@@ -53,7 +62,9 @@ export default function BlogPostPage() {
               {paragraph}
             </p>
           ))}
-          <p className="pt-4 text-[15px] text-[#717071]">— {post.author}</p>
+          <p className="pt-4 text-[15px] text-[#717071]">
+            By {post.author}
+          </p>
         </article>
         <Link
           href="/blog"

@@ -48,6 +48,21 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<IntroPhase>(() => introPhaseForPath(pathname));
   const [returnHome, setReturnHome] = useState(false);
 
+  const navigatingHome =
+    pathname === "/" &&
+    prevPath.current !== null &&
+    prevPath.current !== "/" &&
+    prevPath.current !== pathname;
+
+  const shouldPlayReturnGallery =
+    navigatingHome &&
+    phase === "done" &&
+    typeof window !== "undefined" &&
+    !prefersReducedMotion();
+
+  const effectivePhase: IntroPhase = shouldPlayReturnGallery ? "gallery" : phase;
+  const effectiveReturnHome = navigatingHome || returnHome;
+
   useLayoutEffect(() => {
     const prev = prevPath.current;
     prevPath.current = pathname;
@@ -64,13 +79,11 @@ export function IntroProvider({ children }: { children: ReactNode }) {
         setReturnHome(false);
       } else {
         setReturnHome(true);
-        // Skip logo hold — gallery still expands from the mark
         setPhase("gallery");
       }
       return;
     }
 
-    // First load on home (fixes SSR/hydration starting in "done")
     if (prev === null) {
       setPhase(introPhaseForPath(pathname));
     }
@@ -81,23 +94,23 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   }, [phase]);
 
   useLayoutEffect(() => {
-    document.documentElement.dataset.intro = phase;
+    document.documentElement.dataset.intro = effectivePhase;
     document.body.style.overflow =
-      phase === "logo" || phase === "gallery" ? "hidden" : "";
+      effectivePhase === "logo" || effectivePhase === "gallery" ? "hidden" : "";
     return () => {
       delete document.documentElement.dataset.intro;
       document.body.style.overflow = "";
     };
-  }, [phase]);
+  }, [effectivePhase]);
 
   const value = useMemo<IntroContextValue>(
     () => ({
-      phase,
+      phase: effectivePhase,
       setPhase,
-      showChrome: showChromeFor(phase),
-      returnHome,
+      showChrome: showChromeFor(effectivePhase),
+      returnHome: effectiveReturnHome,
     }),
-    [phase, returnHome],
+    [effectivePhase, effectiveReturnHome],
   );
 
   return (

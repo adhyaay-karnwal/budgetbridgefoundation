@@ -20,9 +20,10 @@ export function HeroGalleryCluster({
   phase,
   returnHome,
 }: HeroGalleryClusterProps) {
-  const revealing = phase === "gallery" || (returnHome && phase === "hero");
+  const revealing =
+    phase === "gallery" || (returnHome && phase === "hero");
   const settled =
-    !returnHome &&
+    !revealing &&
     (phase === "hero" || phase === "chrome" || phase === "done");
   const logoOnly = phase === "logo";
   const logoIntro = logoOnly ? "home-intro-logo" : "";

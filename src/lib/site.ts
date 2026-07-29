@@ -124,9 +124,9 @@ export const SITE = {
 /** Hero copy — Natural structure, BBF words */
 export const HERO = {
   announcement: {
-    title: "Politics, economics & your money",
-    date: "Sep 21",
-    href: "/blog/political-economic-personal-finance",
+    title: "The adolescent window in financial education",
+    date: "Jul 29",
+    href: "/blog/adolescent-window-financial-education",
   },
   headline: "Budget Bridge teaches money skills.",
   muted:
@@ -280,10 +280,8 @@ export const HOME = {
       },
     ],
   },
-  /** Featured post slug — cover image always comes from BLOG.posts */
   blog: {
     label: "Blog",
-    featuredSlug: "political-economic-personal-finance",
   },
   highlights: {
     items: [

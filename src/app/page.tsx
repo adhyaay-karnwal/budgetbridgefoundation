@@ -26,11 +26,11 @@ import {
   TextLink,
 } from "@/components/home/primitives";
 import { Icon } from "@/components/Icon";
-import { getBlogPost } from "@/lib/content";
+import { getFeaturedBlogPost } from "@/lib/content";
 import { MEDIA } from "@/lib/media";
 import { HOME } from "@/lib/site";
 
-const featuredBlog = getBlogPost(HOME.blog.featuredSlug);
+const featuredBlog = getFeaturedBlogPost();
 
 const HIGHLIGHT_MEDIA = {
   story: MEDIA.highlights.story,

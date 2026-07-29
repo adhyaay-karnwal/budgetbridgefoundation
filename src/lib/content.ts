@@ -148,12 +148,34 @@ export const BLOG = {
   title: "Ideas on money, policy, and education",
   posts: [
     {
+      slug: "adolescent-window-financial-education",
+      title: "The Adolescent Window: Why Timing Matters in Financial Education",
+      date: "July 29, 2026",
+      dateShort: "Jul 29",
+      author: "Adhyaay Karnwal",
+      category: "Budget Bridge",
+      cover: {
+        src: "/media/blog/early-financial-education-cover.jpg",
+        alt: "City skyline at dusk, representing long-term economic horizons",
+      },
+      excerpt:
+        "Neuroscience and behavioral research show that adolescence is a critical period for building the habits that shape lifelong financial health.",
+      paragraphs: [
+        "Most personal finance advice assumes that adults can simply learn better habits whenever they choose. Research in neuroscience and developmental psychology suggests a more urgent story. The adolescent brain is unusually receptive to routines around planning, delayed gratification, and risk assessment. Skills practiced in those years tend to persist. Skills deferred often arrive when life is already crowded with tuition, rent, and career pressure.",
+        "Consider compound growth. A teenager who learns to allocate even a small portion of income toward saving or investing internalizes a pattern early. The dollar amount matters less than the repetition. By contrast, someone who first encounters compound interest at twenty-five may understand the math but struggle to change spending habits formed over a decade of unchecked consumption. The knowledge arrives on time. The behavior often does not.",
+        "School policy reflects this gap. Many states treat financial literacy as an elective or bury it inside broader courses where it competes with other topics. Students graduate without practicing credit, budgeting, or tax basics in a structured environment. They enter adulthood with abstract awareness but little hands-on confidence. That gap shows up in student debt loads, underused retirement accounts, and households unprepared for economic shocks.",
+        "Effective programs treat financial education as skill building, not lecture series. Short, repeated exercises with feedback work better than one-off seminars. Gamified scenarios, peer discussion, and real-world case studies help students connect abstract concepts to choices they will face within months, not decades. This is why student-led organizations like Budget Bridge pair classroom instruction with tutoring, advocacy, and community workshops. The goal is not a single lesson but a habit loop formed before adulthood.",
+        "Timing is not the only factor in economic mobility, but it is one we can influence directly. Policymakers, educators, and families share an opportunity to meet students during a window when their brains are wired to learn precisely the skills money management demands. The adolescent window will close for every student. The question is whether we open the door while it is still there.",
+      ],
+    },
+    {
       slug: "political-economic-personal-finance",
       title:
         "Why Understanding the Political and Economic State of the World Matters for Your Personal Finances",
       date: "Sep 21, 2025",
       dateShort: "Sep 21",
       author: "Sonya Viswanath",
+      category: "Budget Bridge",
       cover: {
         src: "/media/blog/finance-washington-collage.jpg",
         alt: "Political and economic forces shaping personal finance",
@@ -172,6 +194,21 @@ export const BLOG = {
 } as const;
 
 export type BlogPost = (typeof BLOG.posts)[number];
+
+function parseBlogDate(date: string): number {
+  const parsed = Date.parse(date);
+  return Number.isNaN(parsed) ? 0 : parsed;
+}
+
+export function getBlogPostsSorted(): BlogPost[] {
+  return [...BLOG.posts].sort(
+    (a, b) => parseBlogDate(b.date) - parseBlogDate(a.date),
+  );
+}
+
+export function getFeaturedBlogPost(): BlogPost | undefined {
+  return getBlogPostsSorted()[0];
+}
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return BLOG.posts.find((post) => post.slug === slug);
