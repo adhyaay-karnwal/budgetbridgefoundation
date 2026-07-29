@@ -64,7 +64,8 @@ export function IntroProvider({ children }: { children: ReactNode }) {
         setReturnHome(false);
       } else {
         setReturnHome(true);
-        setPhase("hero");
+        // Skip logo hold — gallery still expands from the mark
+        setPhase("gallery");
       }
       return;
     }

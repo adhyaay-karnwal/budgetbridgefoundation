@@ -8,6 +8,7 @@ type AccentButtonProps = {
   children: ReactNode;
   className?: string;
   showArrow?: boolean;
+  onClick?: () => void;
 };
 
 function isHttpHref(href: string): boolean {
@@ -29,6 +30,7 @@ export function AccentButton({
   children,
   className = "",
   showArrow = true,
+  onClick,
 }: AccentButtonProps) {
   const classes = `bbf-btn-primary inline-flex h-9 items-center gap-3 rounded-[20px] bg-[#161514] px-4 text-[15px] leading-none text-white transition-colors duration-100 ease-out hover:bg-[var(--button-hover)] ${className}`;
 
@@ -53,6 +55,7 @@ export function AccentButton({
         className={classes}
         target={isHttpHref(href) ? "_blank" : undefined}
         rel={isHttpHref(href) ? "noreferrer" : undefined}
+        onClick={onClick}
       >
         {content}
       </a>
@@ -60,7 +63,7 @@ export function AccentButton({
   }
 
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} onClick={onClick}>
       {content}
     </Link>
   );

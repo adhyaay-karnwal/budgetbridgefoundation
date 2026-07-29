@@ -5,7 +5,6 @@ import { useLayoutEffect, type CSSProperties } from "react";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
 import { HeroGalleryCluster } from "@/components/home/HeroGalleryCluster";
-import { HeroMark } from "@/components/home/HeroMark";
 import { TextLink } from "@/components/home/primitives";
 import { Icon } from "@/components/Icon";
 import { useIntro } from "@/components/intro/IntroProvider";
@@ -13,6 +12,7 @@ import { HERO } from "@/lib/site";
 
 const LOGO_PHASE_MS = 700;
 const GALLERY_PHASE_MS = 1100;
+const GALLERY_PHASE_RETURN_MS = 620;
 const HERO_TO_CHROME_MS = 520;
 const HERO_TO_CHROME_RETURN_MS = 380;
 const CHROME_TO_DONE_MS = 700;
@@ -28,6 +28,7 @@ export function HomeHero() {
   const animateLines =
     phase === "hero" || phase === "chrome" || phase === "done";
   const revealChrome = phase === "chrome" || phase === "done";
+  const galleryHold = returnHome ? GALLERY_PHASE_RETURN_MS : GALLERY_PHASE_MS;
   const heroToChrome = returnHome
     ? HERO_TO_CHROME_RETURN_MS
     : HERO_TO_CHROME_MS;
@@ -41,7 +42,7 @@ export function HomeHero() {
       return () => window.clearTimeout(t);
     }
     if (phase === "gallery") {
-      const t = window.setTimeout(() => setPhase("hero"), GALLERY_PHASE_MS);
+      const t = window.setTimeout(() => setPhase("hero"), galleryHold);
       return () => window.clearTimeout(t);
     }
     if (phase === "hero") {
@@ -52,7 +53,7 @@ export function HomeHero() {
       const t = window.setTimeout(() => setPhase("done"), chromeToDone);
       return () => window.clearTimeout(t);
     }
-  }, [phase, setPhase, heroToChrome, chromeToDone]);
+  }, [phase, setPhase, galleryHold, heroToChrome, chromeToDone]);
 
   let lines = "opacity-0";
   if (skipIntro) lines = "";
@@ -77,7 +78,7 @@ export function HomeHero() {
 
   return (
     <section className="-mt-20 flex min-h-dvh flex-col pt-20">
-      <div className="mt-20 content-gutter-x">
+      <div className="mt-12 content-gutter-x">
         <Link
           href={HERO.announcement.href}
           className={`group inline-flex items-center gap-3 rounded px-2 py-0.5 text-[15px] leading-7 text-[#161514] bg-[#f6f6f6] transition-colors duration-200 hover:bg-[#ececec] ${lines}`}
@@ -94,12 +95,8 @@ export function HomeHero() {
         </Link>
       </div>
 
-      <div className="flex min-h-[min(52vh,420px)] flex-1 items-center justify-center content-gutter-x pb-[74px]">
-        {returnHome ? (
-          <HeroMark />
-        ) : (
-          <HeroGalleryCluster phase={phase} returnHome={returnHome} />
-        )}
+      <div className="flex min-h-[min(48vh,340px)] flex-1 items-center justify-center content-gutter-x pb-[74px]">
+        <HeroGalleryCluster phase={phase} returnHome={returnHome} />
       </div>
 
       <div className="content-gutter-x pb-[80px]">

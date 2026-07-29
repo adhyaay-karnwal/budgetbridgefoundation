@@ -138,56 +138,54 @@ body {
   animation: home-nav-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Hero intro gallery — bento cluster with 10px gaps, grows from logo */
+/* Hero gallery — absolute collage, 10px gutters, grows from logo center */
 .hero-gallery-cluster {
-  display: grid;
-  gap: 10px;
-  width: min(100%, 640px);
-  height: min(52vh, 360px);
-  max-height: 360px;
-  grid-template-columns: repeat(var(--gallery-cols), minmax(0, 1fr));
-  grid-template-rows: repeat(var(--gallery-rows), minmax(0, 1fr));
-  /* Logo cell center ≈ grow origin for slide-out effect */
-  --grow-origin-x: 54%;
-  --grow-origin-y: 52%;
+  position: relative;
+  width: min(100%, var(--stage-w, 480px));
+  aspect-ratio: 480 / 348;
+  max-height: min(52vh, 368px);
 }
 
 .hero-gallery-tile {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
+  position: absolute;
   opacity: 0;
-  transform: scale(0.12);
-  transform-origin: var(--grow-origin-x) var(--grow-origin-y);
+  transform: scale(0.08);
+  transform-origin: var(--grow-x, 50%) var(--grow-y, 50%);
+  will-change: transform, opacity;
 }
 
 .hero-gallery-logo {
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-gallery-logo > div {
+  width: 100%;
+  height: 100%;
 }
 
 .hero-gallery-cluster--reveal .hero-gallery-tile {
-  animation: hero-gallery-tile-grow 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-gallery-tile-grow 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-gallery-cluster--return .hero-gallery-tile {
+  animation-duration: 0.55s;
 }
 
 .hero-gallery-cluster--settled .hero-gallery-tile {
   opacity: 1;
-  transform: scale(1);
+  transform: none;
 }
 
 @keyframes hero-gallery-tile-grow {
   0% {
     opacity: 0;
-    transform: scale(0.12);
-    filter: blur(4px);
-  }
-  55% {
-    opacity: 1;
-    filter: blur(0);
+    transform: scale(0.08);
   }
   100% {
     opacity: 1;
     transform: scale(1);
-    filter: blur(0);
   }
 }
 
@@ -210,6 +208,7 @@ body {
   .home-nav-enter,
   .home-nav-enter-fast,
   .hero-gallery-cluster--reveal .hero-gallery-tile,
+  .hero-gallery-cluster--settled .hero-gallery-tile,
   .page-enter-text,
   .page-enter-text-delay,
   .page-enter-body {

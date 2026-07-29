@@ -4,7 +4,7 @@ import Image from "next/image";
 export function HeroMark({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`flex h-14 w-14 items-center justify-center bg-[#cc9b4c] p-2.5 ${className}`.trim()}
+      className={`flex h-14 w-14 items-center justify-center rounded-[4px] bg-[#cc9b4c] p-2.5 ${className}`.trim()}
     >
       <Image
         src="/bbf-white.svg"

@@ -10,6 +10,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
 import { Icon } from "@/components/Icon";
+import { MobileNav } from "@/components/MobileNav";
 import { useIntro } from "@/components/intro/IntroProvider";
 import { NAV, type NavItem } from "@/lib/site";
 
@@ -195,47 +196,7 @@ export default function Header() {
         </div>
       </div>
 
-      {mobileOpen && (
-        <div className="relative z-20 border-t border-[#f0f0f0] bg-white sm:hidden">
-          <div className="content-gutter-x py-4">
-            {NAV.map((item) => (
-              <div key={item.label} className="py-1">
-                {item.kind === "link" ? (
-                  <Link
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block py-2 text-[15px] font-medium text-[#161514]"
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <>
-                    <p className="py-2 text-[15px] font-medium text-[#161514]">
-                      {item.label}
-                    </p>
-                    <ul className="mb-2 ml-3 space-y-1 border-l border-[#e8e8e8] pl-3">
-                      {item.items.map((sub) => (
-                        <li key={sub.href}>
-                          <Link
-                            href={sub.href}
-                            onClick={() => setMobileOpen(false)}
-                            className="block py-1.5 text-sm text-[#717071]"
-                          >
-                            {sub.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-              </div>
-            ))}
-            <div className="mt-3 border-t border-[#f0f0f0] pt-3">
-              <AccentButton href="/get-involved">Volunteer</AccentButton>
-            </div>
-          </div>
-        </div>
-      )}
+      <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
   );
 }

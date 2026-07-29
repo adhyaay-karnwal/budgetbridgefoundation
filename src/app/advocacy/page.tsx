@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { AdvocacyGallery } from "@/components/AdvocacyGallery";
 import { OutboundLink } from "@/components/OutboundLink";
 import { CtaRow, PageHero, PageSection } from "@/components/PageChrome";
 import { LocalVideo } from "@/components/LocalVideo";
@@ -80,22 +81,7 @@ export default function AdvocacyPage() {
       <PageSection>
         <SectionLabel>Gallery</SectionLabel>
         <SectionHeading>From Board of Education meetings</SectionHeading>
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {photos.map((photo) => (
-            <div
-              key={photo.src}
-              className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-[#ececec]"
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 50vw, 33vw"
-              />
-            </div>
-          ))}
-        </div>
+        <AdvocacyGallery photos={photos} />
       </PageSection>
 
       <TownSection

@@ -5,14 +5,14 @@ import type { CSSProperties } from "react";
 import { HeroMark } from "@/components/home/HeroMark";
 import type { IntroPhase } from "@/components/intro/IntroProvider";
 import {
-  HERO_GALLERY_GRID,
   HERO_GALLERY_LOGO,
+  HERO_GALLERY_STAGE,
   HERO_GALLERY_TILES,
-  gridPlacement,
 } from "./heroGallery";
 
 type HeroGalleryClusterProps = {
   phase: IntroPhase;
+  /** Soft return from another page — still expand from logo, faster */
   returnHome: boolean;
 };
 
@@ -20,73 +20,80 @@ export function HeroGalleryCluster({
   phase,
   returnHome,
 }: HeroGalleryClusterProps) {
-  if (returnHome) return null;
-
+  const revealing = phase === "gallery" || (returnHome && phase === "hero");
   const settled =
-    phase === "hero" || phase === "chrome" || phase === "done";
-  const revealing = phase === "gallery";
-  const logoIntro = phase === "logo";
+    !returnHome &&
+    (phase === "hero" || phase === "chrome" || phase === "done");
+  const logoOnly = phase === "logo";
+  const logoIntro = logoOnly ? "home-intro-logo" : "";
 
   const clusterClass = [
     "hero-gallery-cluster",
     revealing ? "hero-gallery-cluster--reveal" : "",
     settled ? "hero-gallery-cluster--settled" : "",
+    returnHome && revealing ? "hero-gallery-cluster--return" : "",
   ]
     .filter(Boolean)
     .join(" ");
 
-  const logoPlacement = gridPlacement(
-    HERO_GALLERY_LOGO.col,
-    HERO_GALLERY_LOGO.row,
-    HERO_GALLERY_LOGO.colSpan,
-    HERO_GALLERY_LOGO.rowSpan,
-  );
+  const logoLeftPct = (HERO_GALLERY_LOGO.left / HERO_GALLERY_STAGE.width) * 100;
+  const logoTopPct = (HERO_GALLERY_LOGO.top / HERO_GALLERY_STAGE.height) * 100;
+  const logoCxPct =
+    ((HERO_GALLERY_LOGO.left + HERO_GALLERY_LOGO.width / 2) /
+      HERO_GALLERY_STAGE.width) *
+    100;
+  const logoCyPct =
+    ((HERO_GALLERY_LOGO.top + HERO_GALLERY_LOGO.height / 2) /
+      HERO_GALLERY_STAGE.height) *
+    100;
 
   return (
     <div
       className={clusterClass}
       style={
         {
-          "--gallery-cols": HERO_GALLERY_GRID.columns,
-          "--gallery-rows": HERO_GALLERY_GRID.rows,
+          "--stage-w": `${HERO_GALLERY_STAGE.width}px`,
+          "--stage-h": `${HERO_GALLERY_STAGE.height}px`,
+          "--grow-x": `${logoCxPct}%`,
+          "--grow-y": `${logoCyPct}%`,
         } as CSSProperties
       }
       aria-hidden
     >
-      {HERO_GALLERY_TILES.map((tile, index) => {
-        const placement = gridPlacement(
-          tile.col,
-          tile.row,
-          tile.colSpan,
-          tile.rowSpan,
-        );
-
-        return (
-          <div
-            key={tile.id}
-            className="hero-gallery-tile overflow-hidden rounded-[3px] bg-[#ececec] shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
-            style={{
-              ...placement,
-              animationDelay: revealing ? `${tile.delayMs}ms` : undefined,
-            }}
-          >
-            <Image
-              src={tile.image.src}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="140px"
-              priority={index < 4}
-            />
-          </div>
-        );
-      })}
+      {HERO_GALLERY_TILES.map((tile, index) => (
+        <div
+          key={tile.id}
+          className="hero-gallery-tile overflow-hidden rounded-[4px] bg-[#ececec]"
+          style={{
+            left: `${(tile.left / HERO_GALLERY_STAGE.width) * 100}%`,
+            top: `${(tile.top / HERO_GALLERY_STAGE.height) * 100}%`,
+            width: `${(tile.width / HERO_GALLERY_STAGE.width) * 100}%`,
+            height: `${(tile.height / HERO_GALLERY_STAGE.height) * 100}%`,
+            animationDelay: revealing ? `${tile.delayMs}ms` : undefined,
+          }}
+        >
+          <Image
+            src={tile.image.src}
+            alt=""
+            fill
+            className="object-cover"
+            style={{ objectPosition: tile.position ?? "50% 50%" }}
+            sizes="160px"
+            priority={index < 5}
+          />
+        </div>
+      ))}
 
       <div
-        className={`hero-gallery-logo flex items-center justify-center ${logoIntro ? "home-intro-logo" : ""}`}
-        style={logoPlacement}
+        className={`hero-gallery-logo absolute z-10 ${logoIntro}`}
+        style={{
+          left: `${logoLeftPct}%`,
+          top: `${logoTopPct}%`,
+          width: `${(HERO_GALLERY_LOGO.width / HERO_GALLERY_STAGE.width) * 100}%`,
+          height: `${(HERO_GALLERY_LOGO.height / HERO_GALLERY_STAGE.height) * 100}%`,
+        }}
       >
-        <HeroMark />
+        <HeroMark className="h-full w-full" />
       </div>
     </div>
   );
