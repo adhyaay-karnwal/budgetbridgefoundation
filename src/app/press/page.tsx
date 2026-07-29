@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { PageHero, PageSection } from "@/components/PageChrome";
 import { PRESS } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Press · ${SITE.name}`,
   description: PRESS.description,
-};
+});
 
 export default function PressPage() {
   return (

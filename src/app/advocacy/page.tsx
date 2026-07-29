@@ -10,12 +10,13 @@ import {
 } from "@/components/home/primitives";
 import { ADVOCACY } from "@/lib/content";
 import { MEDIA, type AdvocacyVideo } from "@/lib/media";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Advocacy · ${SITE.name}`,
   description: ADVOCACY.body,
-};
+});
 
 function Testimony({ video }: { video: AdvocacyVideo }) {
   return (

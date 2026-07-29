@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageSection } from "@/components/PageChrome";
 import { BLOG, getBlogPost } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
 type PageProps = {
@@ -14,10 +15,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getBlogPost(slug);
 
-  return {
+  return pageMetadata({
     title: `${post?.title ?? "Blog"} · ${SITE.name}`,
-    description: post?.excerpt,
-  };
+    description: post?.excerpt ?? "Blog",
+  });
 }
 
 export default async function BlogPostPage({ params }: PageProps) {

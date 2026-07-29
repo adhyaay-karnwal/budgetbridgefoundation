@@ -5,12 +5,13 @@ import {
   SectionLabel,
 } from "@/components/home/primitives";
 import { GET_INVOLVED } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Get Involved · ${SITE.name}`,
   description: GET_INVOLVED.why,
-};
+});
 
 export default function GetInvolvedPage() {
   return (

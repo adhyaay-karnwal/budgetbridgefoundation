@@ -7,12 +7,13 @@ import {
 } from "@/components/home/primitives";
 import { ABOUT, FOUNDERS } from "@/lib/content";
 import { MEDIA } from "@/lib/media";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `About · ${SITE.name}`,
   description: ABOUT.intro,
-};
+});
 
 export default function AboutPage() {
   return (

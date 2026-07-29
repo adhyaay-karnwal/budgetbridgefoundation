@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { OutboundLink } from "@/components/OutboundLink";
+import { FooterWordmark } from "@/components/tile-field/FooterWordmark";
 import { FOOTER_COLUMNS, SITE } from "@/lib/site";
 
 export default function Footer() {
@@ -30,18 +31,13 @@ export default function Footer() {
         </div>
 
         <div className="mt-20 flex flex-col gap-6 border-t border-[#f0f0f0] pt-10 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex items-center gap-2.5">
-            <Image
-              src="/bbf-black.svg"
-              alt=""
-              width={22}
-              height={22}
-              className="h-[22px] w-[22px]"
-            />
-            <span className="text-[15px] font-medium text-[#161514]">
-              {SITE.name}
-            </span>
-          </div>
+          <Image
+            src="/bbf-black.svg"
+            alt={SITE.name}
+            width={22}
+            height={22}
+            className="h-[22px] w-[22px]"
+          />
 
           <div className="max-w-2xl space-y-3 sm:text-right">
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-[13px] sm:justify-end">
@@ -66,6 +62,8 @@ export default function Footer() {
             </p>
           </div>
         </div>
+
+        <FooterWordmark />
       </div>
     </footer>
   );

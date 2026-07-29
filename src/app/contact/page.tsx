@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { OutboundLink } from "@/components/OutboundLink";
 import { CtaRow, PageHero, PageSection } from "@/components/PageChrome";
 import { CONTACT } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Contact · ${SITE.name}`,
   description: CONTACT.description,
-};
+});
 
 export default function ContactPage() {
   return (

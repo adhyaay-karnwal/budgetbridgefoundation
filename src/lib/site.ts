@@ -109,6 +109,7 @@ export const FOOTER_COLUMNS = [
 export const SITE = {
   name: "Budget Bridge Foundation",
   shortName: "BBF",
+  url: "https://www.budgetbridgefoundation.org",
   email: "budgetbridgefoundation@gmail.com",
   instagram: "https://www.instagram.com/budgetbridgefoundation/",
   instagramHandle: "@budgetbridgefoundation",

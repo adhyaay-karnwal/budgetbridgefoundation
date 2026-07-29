@@ -10,12 +10,13 @@ import {
   SectionLabel,
 } from "@/components/home/primitives";
 import { EDUCATION } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Education · ${SITE.name}`,
   description: EDUCATION.body,
-};
+});
 
 export default function EducationPage() {
   const { gameclass } = EDUCATION;

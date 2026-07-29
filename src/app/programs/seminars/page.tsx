@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { CtaRow, PageHero, PageSection, Split } from "@/components/PageChrome";
 import { GraphicCurriculum } from "@/components/home/graphics";
 import { SEMINARS } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Seminars · ${SITE.name}`,
   description: SEMINARS.body,
-};
+});
 
 export default function SeminarsPage() {
   return (

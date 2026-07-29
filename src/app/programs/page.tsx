@@ -7,12 +7,13 @@ import { PageHero, PageSection } from "@/components/PageChrome";
 import { SectionHeading } from "@/components/home/primitives";
 import { PROGRAMS } from "@/lib/content";
 import { MEDIA, type MediaImage } from "@/lib/media";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Programs · ${SITE.name}`,
   description: PROGRAMS.description,
-};
+});
 
 const CARD_IMAGES = {
   "/programs/education": MEDIA.programs.gameclass,

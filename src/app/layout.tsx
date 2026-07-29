@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { IntroProvider } from "@/components/intro/IntroProvider";
 import { PageEnd } from "@/components/PageEnd";
+import { rootMetadata } from "@/lib/metadata";
 import "./globals.css";
 
 const acuminPro = localFont({
@@ -32,11 +33,7 @@ const acuminPro = localFont({
   variable: "--font-acumin-pro",
 });
 
-export const metadata: Metadata = {
-  title: "Budget Bridge Foundation",
-  description:
-    "Budget Bridge teaches money skills — seminars, tutoring, workshops, and advocacy so every student can thrive.",
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,

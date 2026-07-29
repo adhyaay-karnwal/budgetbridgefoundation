@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero, PageSection } from "@/components/PageChrome";
@@ -7,12 +6,13 @@ import {
   getBlogPostsSorted,
   type BlogPost,
 } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `Blog · ${SITE.name}`,
   description: BLOG.title,
-};
+});
 
 function CoverImage({
   cover,
