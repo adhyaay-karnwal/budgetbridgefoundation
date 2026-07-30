@@ -39,77 +39,39 @@ export type TeamMember = {
   image?: string;
 };
 
-export type TeamGroup = {
-  title: string;
-  members: TeamMember[];
-};
-
-/** BBF Board — leadership (founders) + executive directors */
-export const BBF_BOARD = {
-  leadership: [
-    {
-      title: "Board of Trustees",
-      members: [
-        {
-          name: "Avi Mehta",
-          role: "Co-Founder & Board of Trustees",
-          image: MEDIA.founders.avi.src,
-        },
-        {
-          name: "Rohit Viswanath",
-          role: "Co-Founder & Board of Trustees",
-          image: MEDIA.founders.rohit.src,
-        },
-        {
-          name: "Shubh Potdar",
-          role: "Co-Founder & Board of Trustees",
-          image: MEDIA.founders.shubh.src,
-        },
-      ],
-    },
-    {
-      title: "Executive Director",
-      members: [
-        {
-          name: "Evan Schwartz",
-          role: "Co-Founder & Executive Director",
-          image: MEDIA.founders.evan.src,
-        },
-      ],
-    },
-  ] satisfies TeamGroup[],
-  directors: [
-    {
-      name: "Veera",
-      role: "Executive Director of CT",
-    },
-    {
-      name: "Arnav",
-      role: "Director of Membership",
-    },
-    {
-      name: "Ajay Boradia",
-      role: "Director of Social Media",
-    },
-    {
-      name: "Abhyuday",
-      role: "Director of Outreach",
-    },
-    {
-      name: "Adhyaay Karnwal",
-      role: "Director of Product/Tech",
-    },
-    {
-      name: "Keshav Patel",
-      role: "Director of Campaigns/Projects",
-    },
-    {
-      name: "Zayd",
-      role:
-        "Director of LAMPS (Legislation, Acquisitions, Mergers, Partnerships, Scholarships)",
-    },
-  ] satisfies TeamMember[],
-} as const;
+/** Executive team directors */
+export const EXECUTIVE_TEAM: TeamMember[] = [
+  {
+    name: "Adhyaay Karnwal",
+    role: "Director of Product/Tech",
+    image: MEDIA.team.adhyaay.src,
+  },
+  {
+    name: "Veera",
+    role: "Executive Director of CT",
+  },
+  {
+    name: "Arnav",
+    role: "Director of Membership",
+  },
+  {
+    name: "Ajay Boradia",
+    role: "Director of Social Media",
+  },
+  {
+    name: "Abhyuday",
+    role: "Director of Outreach",
+  },
+  {
+    name: "Keshav Patel",
+    role: "Director of Campaigns/Projects",
+  },
+  {
+    name: "Zayd",
+    role:
+      "Director of LAMPS (Legislation, Acquisitions, Mergers, Partnerships, Scholarships)",
+  },
+];
 
 export function teamMemberImage(member: TeamMember): string {
   return member.image ?? TEAM_PLACEHOLDER;
@@ -131,8 +93,7 @@ export const ABOUT = {
   },
   executiveTeam: {
     label: "Executive team",
-    boardHeading: "BBF Board",
-    directorsHeading: "Executive team",
+    heading: "Executive team",
   },
 } as const;
 

@@ -6,7 +6,7 @@ import {
   SectionLabel,
 } from "@/components/home/primitives";
 import { TeamMemberCard } from "@/components/TeamMemberCard";
-import { ABOUT, BBF_BOARD, FOUNDERS } from "@/lib/content";
+import { ABOUT, EXECUTIVE_TEAM, FOUNDERS } from "@/lib/content";
 import { MEDIA } from "@/lib/media";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -67,38 +67,11 @@ export default function AboutPage() {
 
       <PageSection className="content-gutter-x pb-24 pt-4">
         <SectionLabel>{ABOUT.executiveTeam.label}</SectionLabel>
-        <SectionHeading>{ABOUT.executiveTeam.boardHeading}</SectionHeading>
-
-        <div className="mt-14 space-y-14">
-          {BBF_BOARD.leadership.map((group) => (
-            <div key={group.title}>
-              <h3 className="text-[15px] font-medium text-[#161514]">
-                {group.title}
-              </h3>
-              <div
-                className={`mt-8 grid gap-10 sm:grid-cols-2 ${
-                  group.members.length === 1
-                    ? "lg:grid-cols-1 lg:max-w-xs"
-                    : "lg:grid-cols-3"
-                }`}
-              >
-                {group.members.map((member) => (
-                  <TeamMemberCard key={member.name} {...member} />
-                ))}
-              </div>
-            </div>
+        <SectionHeading>{ABOUT.executiveTeam.heading}</SectionHeading>
+        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {EXECUTIVE_TEAM.map((member) => (
+            <TeamMemberCard key={member.name} {...member} />
           ))}
-        </div>
-
-        <div className="mt-20 border-t border-[#f0f0f0] pt-20">
-          <h3 className="text-[15px] font-medium text-[#161514]">
-            {ABOUT.executiveTeam.directorsHeading}
-          </h3>
-          <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {BBF_BOARD.directors.map((member) => (
-              <TeamMemberCard key={member.name} {...member} />
-            ))}
-          </div>
         </div>
       </PageSection>
     </main>

@@ -24,6 +24,10 @@ export const MEDIA = {
       src: "/media/team/placeholder.svg",
       alt: "Team member photo coming soon",
     },
+    adhyaay: {
+      src: "/media/team/adhyaay.png",
+      alt: "Adhyaay Karnwal",
+    },
   },
   events: {
     conference: {
