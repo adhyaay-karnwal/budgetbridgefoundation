@@ -3,21 +3,37 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageSection } from "@/components/PageChrome";
+import { ArticleJsonLd } from "@/components/seo/JsonLd";
 import { BLOG, getBlogPost } from "@/lib/content";
-import { pageMetadata } from "@/lib/metadata";
-import { SITE } from "@/lib/site";
+import { articleMetadata } from "@/lib/metadata";
+import { absoluteUrl } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export function generateStaticParams() {
+  return BLOG.posts.map((post) => ({ slug: post.slug }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPost(slug);
 
-  return pageMetadata({
-    title: `${post?.title ?? "Blog"} · ${SITE.name}`,
-    description: post?.excerpt ?? "Blog",
+  if (!post) {
+    return articleMetadata({
+      title: "Blog",
+      description: "Blog post from Budget Bridge Foundation",
+      path: `/blog/${slug}`,
+    });
+  }
+
+  return articleMetadata({
+    title: post.title,
+    description: post.excerpt,
+    path: `/blog/${post.slug}`,
+    publishedTime: post.date,
+    authors: [post.author],
   });
 }
 
@@ -29,6 +45,15 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <main className="bg-white">
+      <ArticleJsonLd
+        title={post.title}
+        description={post.excerpt}
+        path={`/blog/${post.slug}`}
+        image={absoluteUrl(post.cover.src)}
+        datePublished={post.date}
+        author={post.author}
+      />
+
       <header className="content-gutter-x pb-10 pt-28">
         <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-[#a3a3a3]">
           {BLOG.label}
@@ -50,7 +75,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           />
         </div>
         <div className="mt-6 grid grid-cols-3 items-center gap-4 text-[15px] text-[#717071]">
-          <span>{post.date}</span>
+          <time dateTime={post.date}>{post.date}</time>
           <span className="text-center">{post.author}</span>
           <span className="text-right">{post.category}</span>
         </div>

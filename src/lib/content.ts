@@ -5,31 +5,115 @@ import { MEDIA } from "@/lib/media";
 export const FOUNDERS = [
   {
     name: "Shubh Potdar",
-    role: "Co-Founder & Executive Director",
+    role: "Co-Founder & Board of Trustees",
     image: MEDIA.founders.shubh.src,
     bio: "Oversees strategy, lobbying, and the direction of Budget Bridge’s programs.",
   },
   {
     name: "Avi Mehta",
-    role: "Co-Founder",
+    role: "Co-Founder & Board of Trustees",
     image: MEDIA.founders.avi.src,
     bio: "Manages curriculum development and program operations.",
   },
   {
     name: "Rohit Viswanath",
-    role: "Co-Founder",
+    role: "Co-Founder & Board of Trustees",
     image: MEDIA.founders.rohit.src,
     bio: "Manages operations and leads domestic outreach.",
   },
   {
     name: "Evan Schwartz",
-    role: "Co-Founder",
+    role: "Co-Founder & Executive Director",
     image: MEDIA.founders.evan.src,
     bio: "Manages international outreach and partnerships.",
   },
 ] as const;
 
 export type Founder = (typeof FOUNDERS)[number];
+
+const TEAM_PLACEHOLDER = MEDIA.team.placeholder.src;
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  image?: string;
+};
+
+export type TeamGroup = {
+  title: string;
+  members: TeamMember[];
+};
+
+/** BBF Board — leadership (founders) + executive directors */
+export const BBF_BOARD = {
+  leadership: [
+    {
+      title: "Board of Trustees",
+      members: [
+        {
+          name: "Avi Mehta",
+          role: "Co-Founder & Board of Trustees",
+          image: MEDIA.founders.avi.src,
+        },
+        {
+          name: "Rohit Viswanath",
+          role: "Co-Founder & Board of Trustees",
+          image: MEDIA.founders.rohit.src,
+        },
+        {
+          name: "Shubh Potdar",
+          role: "Co-Founder & Board of Trustees",
+          image: MEDIA.founders.shubh.src,
+        },
+      ],
+    },
+    {
+      title: "Executive Director",
+      members: [
+        {
+          name: "Evan Schwartz",
+          role: "Co-Founder & Executive Director",
+          image: MEDIA.founders.evan.src,
+        },
+      ],
+    },
+  ] satisfies TeamGroup[],
+  directors: [
+    {
+      name: "Veera",
+      role: "Executive Director of CT",
+    },
+    {
+      name: "Arnav",
+      role: "Director of Membership",
+    },
+    {
+      name: "Ajay Boradia",
+      role: "Director of Social Media",
+    },
+    {
+      name: "Abhyuday",
+      role: "Director of Outreach",
+    },
+    {
+      name: "Adhyaay Karnwal",
+      role: "Director of Product/Tech",
+    },
+    {
+      name: "Keshav Patel",
+      role: "Director of Campaigns/Projects",
+    },
+    {
+      name: "Zayd",
+      role:
+        "Director of LAMPS (Legislation, Acquisitions, Mergers, Partnerships, Scholarships)",
+    },
+  ] satisfies TeamMember[],
+} as const;
+
+export function teamMemberImage(member: TeamMember): string {
+  return member.image ?? TEAM_PLACEHOLDER;
+}
 
 /** Page copy — factual text verified against BBF sources */
 
@@ -44,6 +128,11 @@ export const ABOUT = {
     label: "Our story",
     heading: "How Budget Bridge began",
     body: "Four high school students, united by a shared passion for finance and education, came together with a vision to address economic inequality. Recognizing that gap as one deeply tied to disparities in financial literacy, they understood that knowledge could be a powerful equalizer. Their journey began with the belief that empowering underprivileged children with financial education is essential to breaking the cycle of poverty.",
+  },
+  executiveTeam: {
+    label: "Executive team",
+    boardHeading: "BBF Board",
+    directorsHeading: "Executive team",
   },
 } as const;
 

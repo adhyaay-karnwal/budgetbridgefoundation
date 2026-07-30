@@ -11,11 +11,18 @@ import {
 import { ADVOCACY } from "@/lib/content";
 import { MEDIA, type AdvocacyVideo } from "@/lib/media";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Advocacy · ${SITE.name}`,
-  description: ADVOCACY.body,
+  title: "Advocacy",
+  description: `${ADVOCACY.body} Budget Bridge Foundation advocates for financial literacy policy and legislation in New Jersey and nationwide.`,
+  path: "/advocacy",
+  keywords: [
+    "financial literacy advocacy",
+    "financial literacy legislation",
+    "New Jersey financial literacy",
+    "Senate Bill 3497",
+    "Assembly Bill A4764",
+  ],
 });
 
 function Testimony({ video }: { video: AdvocacyVideo }) {

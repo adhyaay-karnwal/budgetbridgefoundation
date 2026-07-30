@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { PageHero, PageSection } from "@/components/PageChrome";
 import { PRESS } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Press · ${SITE.name}`,
-  description: PRESS.description,
+  title: "Press",
+  description: `${PRESS.description} News coverage of Budget Bridge Foundation's financial literacy work in Parsippany, Randolph, and New Jersey schools.`,
+  path: "/press",
+  keywords: ["Budget Bridge Foundation news", "financial literacy press", "Parsippany schools"],
 });
 
 export default function PressPage() {

@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { IntroProvider } from "@/components/intro/IntroProvider";
 import { PageEnd } from "@/components/PageEnd";
+import { SiteJsonLd } from "@/components/seo/JsonLd";
 import { rootMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -43,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${acuminPro.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
+        <SiteJsonLd />
         <IntroProvider>
           <Header />
           <div className="flex-1">{children}</div>

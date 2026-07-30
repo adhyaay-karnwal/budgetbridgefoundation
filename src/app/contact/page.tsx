@@ -6,8 +6,9 @@ import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Contact · ${SITE.name}`,
-  description: CONTACT.description,
+  title: "Contact",
+  description: `${CONTACT.description} Email Budget Bridge Foundation or connect on Instagram to volunteer, partner, or learn about our financial literacy programs.`,
+  path: "/contact",
 });
 
 export default function ContactPage() {

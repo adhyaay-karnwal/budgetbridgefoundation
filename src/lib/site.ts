@@ -129,7 +129,7 @@ export const HERO = {
     date: "Jul 29",
     href: "/blog/adolescent-window-financial-education",
   },
-  headline: "Budget Bridge teaches money skills.",
+  headline: "Budget Bridge Foundation teaches money skills.",
   muted:
     "Seminars. Tutoring. Workshops. Advocacy. Curriculum. Everything students need to thrive *",
   primaryCta: { label: "Volunteer with us", href: "/get-involved" } satisfies CtaLink,

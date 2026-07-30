@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import {
   ArrowRight01Icon,
@@ -5,6 +6,14 @@ import {
   Notification01Icon,
 } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/Icon";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Design System",
+  description: "Internal design system reference.",
+  path: "/design-system",
+  noIndex: true,
+});
 
 export default function DesignSystemPage() {
   return (

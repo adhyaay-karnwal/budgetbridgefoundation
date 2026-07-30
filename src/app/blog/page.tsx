@@ -7,11 +7,12 @@ import {
   type BlogPost,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Blog · ${SITE.name}`,
-  description: BLOG.title,
+  title: "Blog",
+  description: `${BLOG.title}. Articles on personal finance, financial literacy policy, youth money education, and nonprofit financial education from Budget Bridge Foundation.`,
+  path: "/blog",
+  keywords: ["financial literacy blog", "personal finance articles", "youth financial education"],
 });
 
 function CoverImage({

@@ -9,8 +9,10 @@ import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Get Involved · ${SITE.name}`,
-  description: GET_INVOLVED.why,
+  title: "Get Involved",
+  description: `${GET_INVOLVED.why} Volunteer with Budget Bridge Foundation — a financial education nonprofit with roles in outreach, curriculum, policy, research, social media, and tech.`,
+  path: "/get-involved",
+  keywords: ["volunteer financial literacy", "nonprofit volunteer", "financial education volunteer"],
 });
 
 export default function GetInvolvedPage() {

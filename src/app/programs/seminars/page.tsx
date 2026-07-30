@@ -3,11 +3,12 @@ import { CtaRow, PageHero, PageSection, Split } from "@/components/PageChrome";
 import { GraphicCurriculum } from "@/components/home/graphics";
 import { SEMINARS } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Seminars · ${SITE.name}`,
-  description: SEMINARS.body,
+  title: "Seminars",
+  description: `${SEMINARS.body} Free elementary and middle school financial literacy seminars from Budget Bridge Foundation, a student-led nonprofit.`,
+  path: "/programs/seminars",
+  keywords: ["school financial literacy seminars", "elementary money skills", "middle school personal finance"],
 });
 
 export default function SeminarsPage() {

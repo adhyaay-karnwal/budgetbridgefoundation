@@ -27,8 +27,11 @@ import {
 } from "@/components/home/primitives";
 import { Icon } from "@/components/Icon";
 import { getFeaturedBlogPost } from "@/lib/content";
+import { homeMetadata } from "@/lib/metadata";
 import { MEDIA } from "@/lib/media";
 import { HOME } from "@/lib/site";
+
+export const metadata = homeMetadata();
 
 const featuredBlog = getFeaturedBlogPost();
 

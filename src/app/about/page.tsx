@@ -5,14 +5,16 @@ import {
   SectionHeading,
   SectionLabel,
 } from "@/components/home/primitives";
-import { ABOUT, FOUNDERS } from "@/lib/content";
+import { TeamMemberCard } from "@/components/TeamMemberCard";
+import { ABOUT, BBF_BOARD, FOUNDERS } from "@/lib/content";
 import { MEDIA } from "@/lib/media";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `About · ${SITE.name}`,
-  description: ABOUT.intro,
+  title: "About",
+  description: `${ABOUT.intro} Learn about Budget Bridge Foundation, a student-led financial literacy nonprofit and 501(c)(3).`,
+  path: "/about",
+  keywords: ["about Budget Bridge Foundation", "student-led nonprofit", "financial literacy organization"],
 });
 
 export default function AboutPage() {
@@ -58,25 +60,45 @@ export default function AboutPage() {
         <SectionHeading>Meet the founders</SectionHeading>
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {FOUNDERS.map((founder) => (
-            <article key={founder.name}>
-              <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-[2px] bg-[#ececec]">
-                <Image
-                  src={founder.image}
-                  alt={founder.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 25vw"
-                />
-              </div>
-              <h3 className="text-[17px] font-medium text-[#161514]">
-                {founder.name}
-              </h3>
-              <p className="mt-1 text-[14px] text-[#a3a3a3]">{founder.role}</p>
-              <p className="mt-3 text-[15px] leading-6 text-[#717071]">
-                {founder.bio}
-              </p>
-            </article>
+            <TeamMemberCard key={founder.name} {...founder} />
           ))}
+        </div>
+      </PageSection>
+
+      <PageSection className="content-gutter-x pb-24 pt-4">
+        <SectionLabel>{ABOUT.executiveTeam.label}</SectionLabel>
+        <SectionHeading>{ABOUT.executiveTeam.boardHeading}</SectionHeading>
+
+        <div className="mt-14 space-y-14">
+          {BBF_BOARD.leadership.map((group) => (
+            <div key={group.title}>
+              <h3 className="text-[15px] font-medium text-[#161514]">
+                {group.title}
+              </h3>
+              <div
+                className={`mt-8 grid gap-10 sm:grid-cols-2 ${
+                  group.members.length === 1
+                    ? "lg:grid-cols-1 lg:max-w-xs"
+                    : "lg:grid-cols-3"
+                }`}
+              >
+                {group.members.map((member) => (
+                  <TeamMemberCard key={member.name} {...member} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-20 border-t border-[#f0f0f0] pt-20">
+          <h3 className="text-[15px] font-medium text-[#161514]">
+            {ABOUT.executiveTeam.directorsHeading}
+          </h3>
+          <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {BBF_BOARD.directors.map((member) => (
+              <TeamMemberCard key={member.name} {...member} />
+            ))}
+          </div>
         </div>
       </PageSection>
     </main>

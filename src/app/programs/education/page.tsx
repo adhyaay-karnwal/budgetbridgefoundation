@@ -11,11 +11,12 @@ import {
 } from "@/components/home/primitives";
 import { EDUCATION } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Education · ${SITE.name}`,
-  description: EDUCATION.body,
+  title: "Education",
+  description: `${EDUCATION.body} Budget Bridge Foundation offers free financial literacy tutoring and workshops for students ages 10–16 worldwide.`,
+  path: "/programs/education",
+  keywords: ["financial literacy tutoring", "youth money education", "personal finance workshops"],
 });
 
 export default function EducationPage() {

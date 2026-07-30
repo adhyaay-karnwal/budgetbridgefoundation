@@ -19,6 +19,12 @@ export const MEDIA = {
     rohit: { src: "/media/founders/rohit.jpg", alt: "Rohit Viswanath" },
     evan: { src: "/media/founders/evan.png", alt: "Evan Schwartz" },
   },
+  team: {
+    placeholder: {
+      src: "/media/team/placeholder.svg",
+      alt: "Team member photo coming soon",
+    },
+  },
   events: {
     conference: {
       src: "/media/events/conference.jpg",

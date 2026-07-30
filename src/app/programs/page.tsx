@@ -11,8 +11,10 @@ import { pageMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: `Programs · ${SITE.name}`,
-  description: PROGRAMS.description,
+  title: "Programs",
+  description: `${PROGRAMS.description} Budget Bridge Foundation programs include live tutoring, school seminars, workshops, and financial literacy advocacy for students worldwide.`,
+  path: "/programs",
+  keywords: ["financial literacy programs", "student financial education", "nonprofit education programs"],
 });
 
 const CARD_IMAGES = {
