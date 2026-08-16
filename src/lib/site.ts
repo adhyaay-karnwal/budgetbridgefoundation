@@ -40,6 +40,7 @@ export const NAV: NavItem[] = [
     ],
   },
   { label: "Advocacy", href: "/advocacy", kind: "link" },
+  { label: "Partners", href: "/partners", kind: "link" },
   {
     label: "About",
     kind: "menu",
@@ -84,6 +85,7 @@ export const FOOTER_COLUMNS = [
       { label: "Our story", href: "/about" },
       { label: "Press", href: "/press" },
       { label: "Blog", href: "/blog" },
+      { label: "Partners", href: "/partners" },
       { label: "Get Involved", href: "/get-involved" },
       { label: "Contact", href: "/contact" },
     ],
@@ -145,6 +147,11 @@ export const HOME = {
     label: "Mission",
     heading: "Our Mission",
     body: "We bridge the financial literacy gap by empowering students through local seminars, school presentations, workshops, competitions, and live tutoring. Our goal is to equip the next generation with essential money management skills to thrive in a global economy.",
+  },
+  globe: {
+    label: "Global reach",
+    heading: "Impact across the globe",
+    body: "Budget Bridge's live tutoring, seminars, and NGO partnerships reach students across North America, Latin America, Africa, and Asia. We currently work in 9+ countries, and that number keeps growing.",
   },
   benefits: {
     label: "Programs",
