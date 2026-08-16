@@ -161,6 +161,18 @@ export const ADVOCACY = {
   },
 } as const;
 
+export const PARTNERS = {
+  label: "Partners",
+  title: "Partners in financial education",
+  intro:
+    "Budget Bridge works with NGOs, schools, and companies that share our mission. Together, we expand financial literacy to students in classrooms and communities around the world.",
+  comingSoon: {
+    label: "Coming soon",
+    heading: "More partners are on the way",
+    body: "We currently have more partners than the ones featured here. The complete list and partnership data are coming soon. Check back for details on each collaboration and the students we reach together.",
+  },
+} as const;
+
 export const GET_INVOLVED = {
   label: "Get involved",
   title: "Volunteer with Budget Bridge",

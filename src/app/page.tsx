@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Tick02Icon } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
+import { Globe } from "@/components/Globe";
 import { HomeHero } from "@/components/home/HomeHero";
 import {
   InvolvedShowcase,
@@ -96,6 +97,20 @@ export default function Home() {
             </p>
           </div>
           <GraphicFounders />
+        </div>
+      </HomeSection>
+
+      {/* 02b Global reach */}
+      <HomeSection>
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <SectionLabel>{HOME.globe.label}</SectionLabel>
+            <SectionHeading>{HOME.globe.heading}</SectionHeading>
+            <p className="mt-8 max-w-xl text-[17px] leading-7 text-[#717071]">
+              {HOME.globe.body}
+            </p>
+          </div>
+          <Globe />
         </div>
       </HomeSection>
 

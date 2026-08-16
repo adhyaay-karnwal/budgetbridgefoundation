@@ -62,6 +62,7 @@ export const SITEMAP_ROUTES: SitemapRoute[] = [
   { path: "/programs/education", changeFrequency: "monthly", priority: 0.85 },
   { path: "/programs/seminars", changeFrequency: "monthly", priority: 0.85 },
   { path: "/advocacy", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/partners", changeFrequency: "monthly", priority: 0.8 },
   { path: "/get-involved", changeFrequency: "monthly", priority: 0.85 },
   { path: "/press", changeFrequency: "weekly", priority: 0.8 },
   { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
