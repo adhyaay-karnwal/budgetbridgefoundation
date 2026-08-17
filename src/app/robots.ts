@@ -1,8 +1,13 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/seo";
-import { SITE } from "@/lib/site";
+import { headers } from "next/headers";
+import { absoluteUrl, resolveSiteBaseUrl } from "@/lib/seo";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const headersList = await headers();
+  const host =
+    headersList.get("x-forwarded-host") ?? headersList.get("host");
+  const baseUrl = resolveSiteBaseUrl(host);
+
   return {
     rules: [
       {
@@ -21,7 +26,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/design-system", "/api/"],
       },
     ],
-    host: SITE.url,
-    sitemap: absoluteUrl("/sitemap.xml"),
+    host: baseUrl,
+    sitemap: absoluteUrl("/sitemap.xml", baseUrl),
   };
 }

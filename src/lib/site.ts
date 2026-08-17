@@ -122,7 +122,6 @@ export const SITE = {
   impact: {
     students: "45,000",
     partnerReach: "650,000",
-    partnerReachPotential: "950 million",
     grants: "$200k+",
     countries: String(PARTNER_COUNTRY_COUNT),
   },
@@ -155,7 +154,7 @@ export const HOME = {
   globe: {
     label: "Partners",
     heading: "Partners across the globe",
-    body: `These pins mark our partners and collaborators. Together they represent about ${SITE.impact.partnerReach} people today, with a path toward ${SITE.impact.partnerReachPotential}. We work with partners in ${SITE.impact.countries} countries, and that list keeps growing.`,
+    body: `These pins mark our partners and collaborators. Together they represent about ${SITE.impact.partnerReach} people through our partner network. We work with partners in ${SITE.impact.countries} countries, and that list keeps growing.`,
     primaryCta: { label: "View all countries", href: "/partners#countries" } satisfies CtaLink,
     secondaryCta: { label: "Become a partner", href: "/contact" } satisfies CtaLink,
   },
@@ -257,7 +256,7 @@ export const HOME = {
         id: "partners" as const,
         title: `${SITE.impact.partnerReach} partner reach`,
         description:
-          `Member reach through our partners and collaborators, with a path toward ${SITE.impact.partnerReachPotential}.`,
+          "Member reach through our partners and collaborators worldwide.",
       },
       {
         id: "grants" as const,
