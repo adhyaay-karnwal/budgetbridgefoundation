@@ -238,6 +238,69 @@ export const BLOG = {
       ],
     },
     {
+      slug: "gamification-financial-literacy-middle-school",
+      title: "Why Gamification Works for Teaching Money Skills to Middle Schoolers",
+      date: "May 14, 2026",
+      dateShort: "May 14",
+      author: "Adhyaay Karnwal",
+      category: "Budget Bridge",
+      cover: {
+        src: "/media/blog/bbf-blog-original.jpg",
+        alt: "Students engaging with interactive financial literacy lessons",
+      },
+      excerpt:
+        "Middle school students learn budgeting and saving faster when lessons feel like play. Here is what we learned building interactive finance content with GameClass AI.",
+      paragraphs: [
+        "Ask a twelve-year-old to read a chapter on compound interest and you will often get polite silence. Ask the same student to run a simulated lemonade stand, track expenses, and decide whether to reinvest profits, and the room gets loud in the best way. That difference is not about motivation alone. It is about how the brain processes feedback when consequences are immediate and visible.",
+        "At Budget Bridge, we partner with GameClass AI to turn personal finance concepts into short, interactive lessons. Students practice budgeting, credit, saving, and planning inside scenarios that mirror choices they will face soon: part-time jobs, school supplies, shared expenses with friends, and small savings goals. The format matters. A wrong answer in a game shows up right away. A lecture on APR does not.",
+        "Gamification works here because it lowers the cost of failure. Students can overspend in a simulation, see the outcome, and try again without real money on the line. Repetition builds confidence. Over several sessions, patterns emerge: students start checking balances before spending, comparing options, and asking what happens next month if they save instead of spend.",
+        "Teachers and volunteers do not disappear in this model. Technology handles practice loops; adults handle context, questions, and discussion. The best sessions combine a short interactive module with a conversation about how the scenario connects to a student's real life. That pairing is what moves knowledge from the screen into habit.",
+        "Financial literacy should not feel like a test students are destined to fail. When middle schoolers can experiment, get feedback, and improve, money skills stop sounding like adult problems and start sounding like tools they can actually use.",
+      ],
+    },
+    {
+      slug: "building-global-financial-literacy-partnerships",
+      title: "Building Financial Literacy Partnerships Across Borders",
+      date: "March 6, 2026",
+      dateShort: "Mar 6",
+      author: "Evan Schwartz",
+      category: "Budget Bridge",
+      cover: {
+        src: "/media/events/conference.jpg",
+        alt: "Budget Bridge team connecting with international education partners",
+      },
+      excerpt:
+        "Scaling student financial education means working with local partners who understand their communities. Lessons from growing Budget Bridge's global network.",
+      paragraphs: [
+        "Budget Bridge started in New Jersey with seminars and tutoring in local schools. Our reach grew when we stopped trying to export one playbook everywhere and started listening to partners on the ground. NGOs, schools, and community groups in other countries know their students, their schedules, and the barriers families face. Our job is to bring curriculum, training, and support that fits their context.",
+        "International partnerships succeed when expectations are clear from the start. We share lesson plans, volunteer training materials, and program structures that partners can adapt. They share local knowledge: which grades are available, what languages students prefer, and how to reach families who need the information most. Neither side has to do everything alone.",
+        "Trust builds slowly. Early collaborations often start with a single workshop or tutoring pilot. When students show up consistently and volunteers feel prepared, partners expand. Some add seminars. Others integrate modules into existing after-school programs. The common thread is that financial literacy becomes part of what the organization already does, not a one-off event that disappears after a visit.",
+        "Scale also requires honesty about limits. We cannot be in every classroom personally. Partners extend our reach because they are already embedded in communities we would take years to understand. That is why our partner country list keeps growing and why we treat collaborators as co-owners of the mission, not recipients of a donation.",
+        "Financial education is a global problem with local solutions. Students everywhere need budgeting, saving, and planning skills. The organizations that teach them best are often already in the room. Budget Bridge's role is to equip those partners and stay accountable to the students they serve.",
+      ],
+    },
+    {
+      slug: "student-led-advocacy-board-of-education",
+      title: "What Student-Led Advocacy Looks Like at a Board of Education Meeting",
+      date: "December 3, 2025",
+      dateShort: "Dec 3",
+      author: "Adhyaay Karnwal",
+      category: "Budget Bridge",
+      cover: {
+        src: "/media/highlights/advocacy.jpg",
+        alt: "Students preparing testimony for a local Board of Education meeting",
+      },
+      excerpt:
+        "Speaking at Randolph and Parsippany Board of Education meetings taught us that policy advocacy is part of financial literacy, not separate from it.",
+      paragraphs: [
+        "Financial literacy is often taught as a classroom topic. At Budget Bridge, we learned it is also a civic one. When schools decide whether to offer a standalone personal finance course, students are among the people most affected. Showing up to say so, clearly and respectfully, is part of closing the gap we talk about in seminars.",
+        "Our founders prepared testimony for Board of Education meetings in Randolph and Parsippany with the same care they bring to lesson plans. They researched graduation requirements, compared neighboring districts, and explained why a dedicated course matters more than a few scattered units inside other classes. The goal was not to perform outrage. It was to give decision-makers specific reasons to act.",
+        "Public comment is intimidating. Microphones, timed remarks, and formal agendas are unfamiliar to most teenagers. Practice helped. Students drafted talking points, rehearsed with each other, and focused on stories: what they wished they had learned before getting a first job, opening a bank account, or comparing college loan offers. Personal experience carried more weight than statistics alone.",
+        "The response surprised us. Board members asked follow-up questions. Community members approached us afterward. Local press covered the issue. Advocacy did not replace classroom work. It amplified it. Students who testified became more invested in the curriculum they were asking schools to adopt.",
+        "Policy change is slow, and not every meeting ends with a yes. But student voice belongs in these rooms. When young people explain why money skills matter for their futures, officials listen differently than when the same argument comes only from adults. Budget Bridge will keep showing up, because financial literacy is not just what we teach. It is what we fight for.",
+      ],
+    },
+    {
       slug: "political-economic-personal-finance",
       title:
         "Why Understanding the Political and Economic State of the World Matters for Your Personal Finances",
