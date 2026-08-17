@@ -13,8 +13,11 @@ export const ORG_ALTERNATE_NAMES = [
 export const SEO_KEYWORDS = [
   "Budget Bridge Foundation",
   "Budget Bridge",
+  "budget bridge",
+  "budget bridge foundation",
   "BBF",
   "Bridget Bridge Foundation",
+  "financial literacy",
   "financial literacy nonprofit",
   "financial education nonprofit",
   "student-led nonprofit",
@@ -37,10 +40,10 @@ export const DEFAULT_DESCRIPTION =
   "Budget Bridge Foundation is a student-led 501(c)(3) nonprofit teaching personal finance, money skills, and financial literacy through seminars, tutoring, workshops, and policy advocacy worldwide.";
 
 export const HOME_TITLE =
-  "Budget Bridge Foundation | Financial Literacy Nonprofit for Students";
+  "Budget Bridge Foundation | Budget Bridge | Financial Literacy Nonprofit";
 
 export const HOME_DESCRIPTION =
-  "Budget Bridge Foundation (BBF) is a student-led financial literacy nonprofit. Free seminars, live tutoring, workshops, and advocacy help students learn budgeting, saving, credit, and money management.";
+  "Budget Bridge Foundation is a student-led financial literacy nonprofit. Free seminars, live tutoring, workshops, and advocacy help students learn budgeting, saving, credit, and money management.";
 
 export function absoluteUrl(path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
@@ -62,7 +65,7 @@ export const SITEMAP_ROUTES: SitemapRoute[] = [
   { path: "/programs/education", changeFrequency: "monthly", priority: 0.85 },
   { path: "/programs/seminars", changeFrequency: "monthly", priority: 0.85 },
   { path: "/advocacy", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/partners", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/partners", changeFrequency: "weekly", priority: 0.8 },
   { path: "/get-involved", changeFrequency: "monthly", priority: 0.85 },
   { path: "/press", changeFrequency: "weekly", priority: 0.8 },
   { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
@@ -81,6 +84,7 @@ export const ORGANIZATION_JSON_LD = {
   "@id": absoluteUrl("/#organization"),
   name: SITE.name,
   alternateName: [...ORG_ALTERNATE_NAMES],
+  legalName: SITE.name,
   url: SITE.url,
   logo: absoluteUrl("/icon.png"),
   image: absoluteUrl("/media/bbf-banner.png"),
@@ -93,12 +97,10 @@ export const ORGANIZATION_JSON_LD = {
     "@type": "Place",
     name: "New Jersey, United States",
   },
-  areaServed: [
-    { "@type": "Country", name: "United States" },
-    { "@type": "Place", name: "Latin America" },
-    { "@type": "Place", name: "Africa" },
-    { "@type": "Place", name: "Asia" },
-  ],
+  areaServed: {
+    "@type": "Place",
+    name: "Worldwide",
+  },
   knowsAbout: [
     "Financial literacy",
     "Personal finance education",

@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import createGlobe from "cobe";
+import {
+  PARTNER_COUNTRIES,
+  type PartnerCountry,
+} from "@/lib/partners";
 
-export type GlobeCountry = {
-  id: string;
-  name: string;
-  location: [number, number];
-};
+export type GlobeCountry = PartnerCountry;
 
 type GlobeProps = {
   markers?: GlobeCountry[];
@@ -15,30 +15,31 @@ type GlobeProps = {
   speed?: number;
 };
 
-/**
- * Countries reached by Budget Bridge, pinpointed by country centroid.
- * Spans North America, Latin America, Africa, and Asia.
- */
-export const COUNTRY_MARKERS: GlobeCountry[] = [
-  { id: "usa", name: "USA", location: [39.83, -98.58] },
-  // Latin America
-  { id: "mexico", name: "Mexico", location: [23.63, -102.55] },
-  { id: "colombia", name: "Colombia", location: [4.57, -74.3] },
-  { id: "peru", name: "Peru", location: [-9.19, -75.02] },
-  { id: "brazil", name: "Brazil", location: [-10.77, -52.92] },
-  { id: "argentina", name: "Argentina", location: [-34.6, -58.38] },
-  { id: "chile", name: "Chile", location: [-33.45, -70.67] },
-  // Africa
-  { id: "nigeria", name: "Nigeria", location: [9.08, 8.68] },
-  { id: "ghana", name: "Ghana", location: [7.95, -1.02] },
-  { id: "kenya", name: "Kenya", location: [-1.29, 36.82] },
-  { id: "south-africa", name: "South Africa", location: [-30.56, 22.94] },
-  // Asia
-  { id: "india", name: "India", location: [22.35, 78.66] },
-  { id: "philippines", name: "Philippines", location: [12.88, 121.77] },
-  { id: "vietnam", name: "Vietnam", location: [16.0, 107.9] },
-  { id: "indonesia", name: "Indonesia", location: [-2.55, 118.02] },
-];
+/** Partner countries, pinpointed by country centroid. */
+export const COUNTRY_MARKERS: GlobeCountry[] = PARTNER_COUNTRIES;
+
+/** Labels for a geographic spread so clustered regions stay readable. */
+const LABELED_COUNTRY_IDS = new Set([
+  "usa",
+  "canada",
+  "mexico",
+  "brazil",
+  "argentina",
+  "uk",
+  "france",
+  "germany",
+  "nigeria",
+  "south-africa",
+  "kenya",
+  "india",
+  "china",
+  "japan",
+  "australia",
+  "uae",
+  "egypt",
+  "indonesia",
+  "philippines",
+]);
 
 export function Globe({
   markers = COUNTRY_MARKERS,
@@ -117,7 +118,7 @@ export function Globe({
         markerElevation: 0,
         markers: markers.map((m) => ({
           location: m.location,
-          size: 0.025,
+          size: 0.014,
           id: m.id,
         })),
         arcs: [],
@@ -172,42 +173,44 @@ export function Globe({
           touchAction: "none",
         }}
       />
-      {markers.map((m) => (
-        <div
-          key={m.id}
-          style={{
-            position: "absolute",
-            positionAnchor: `--cobe-${m.id}`,
-            bottom: "anchor(top)",
-            left: "anchor(center)",
-            translate: "-50% 0",
-            marginBottom: 6,
-            pointerEvents: "none",
-            display: "flex",
-            alignItems: "center",
-            padding: "0.3rem 0.5rem",
-            background: "#1a1a2e",
-            color: "#fff",
-            borderRadius: 3,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-            opacity: `var(--cobe-visible-${m.id}, 0)`,
-            filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
-            transition: "opacity 0.4s, filter 0.4s",
-          }}
-        >
-          <span
+      {markers
+        .filter((m) => LABELED_COUNTRY_IDS.has(m.id))
+        .map((m) => (
+          <div
+            key={m.id}
             style={{
-              fontSize: "0.6rem",
-              fontWeight: 500,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              whiteSpace: "nowrap",
+              position: "absolute",
+              positionAnchor: `--cobe-${m.id}`,
+              bottom: "anchor(top)",
+              left: "anchor(center)",
+              translate: "-50% 0",
+              marginBottom: 6,
+              pointerEvents: "none",
+              display: "flex",
+              alignItems: "center",
+              padding: "0.3rem 0.5rem",
+              background: "#1a1a2e",
+              color: "#fff",
+              borderRadius: 3,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              opacity: `var(--cobe-visible-${m.id}, 0)`,
+              filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
+              transition: "opacity 0.4s, filter 0.4s",
             }}
           >
-            {m.name}
-          </span>
-        </div>
-      ))}
+            <span
+              style={{
+                fontSize: "0.6rem",
+                fontWeight: 500,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {m.name}
+            </span>
+          </div>
+        ))}
     </div>
   );
 }

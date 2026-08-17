@@ -14,9 +14,9 @@ import {
   GraphicCurriculum,
   GraphicFounders,
   GraphicGameClass,
-  GraphicStatCountries,
+  GraphicStatGrants,
+  GraphicStatPartnerReach,
   GraphicStatStudents,
-  GraphicStatVolunteers,
   GraphicTutoring,
   LayeredHighlight,
 } from "@/components/home/graphics";
@@ -50,8 +50,8 @@ const BENEFIT_GRAPHICS = {
 
 const IMPACT_GRAPHICS = {
   students: <GraphicStatStudents />,
-  countries: <GraphicStatCountries />,
-  volunteers: <GraphicStatVolunteers />,
+  partners: <GraphicStatPartnerReach />,
+  grants: <GraphicStatGrants />,
 } as const;
 
 function HomeSection({
@@ -100,7 +100,7 @@ export default function Home() {
         </div>
       </HomeSection>
 
-      {/* 02b Global reach */}
+      {/* 02b Partners */}
       <HomeSection>
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -109,6 +109,11 @@ export default function Home() {
             <p className="mt-8 max-w-xl text-[17px] leading-7 text-[#717071]">
               {HOME.globe.body}
             </p>
+            <CtaRow
+              primary={HOME.globe.primaryCta}
+              secondary={HOME.globe.secondaryCta}
+              className="mt-10 flex flex-wrap items-center gap-4"
+            />
           </div>
           <Globe />
         </div>
