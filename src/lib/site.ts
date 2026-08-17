@@ -1,3 +1,5 @@
+import { PARTNER_COUNTRY_COUNT } from "@/lib/partners";
+
 export type CtaLink = {
   label: string;
   href: string;
@@ -118,9 +120,11 @@ export const SITE = {
   ein: "39-3370086",
   tagline: "Empowering futures through financial education.",
   impact: {
-    students: "4,200",
-    countries: "9",
-    volunteers: "30+",
+    students: "45,000",
+    partnerReach: "650,000",
+    partnerReachPotential: "950 million",
+    grants: "$200k+",
+    countries: String(PARTNER_COUNTRY_COUNT),
   },
 };
 
@@ -149,9 +153,11 @@ export const HOME = {
     body: "We bridge the financial literacy gap by empowering students through local seminars, school presentations, workshops, competitions, and live tutoring. Our goal is to equip the next generation with essential money management skills to thrive in a global economy.",
   },
   globe: {
-    label: "Global reach",
-    heading: "Impact across the globe",
-    body: "Budget Bridge's live tutoring, seminars, and NGO partnerships reach students across North America, Latin America, Africa, and Asia. We currently work in 9+ countries, and that number keeps growing.",
+    label: "Partners",
+    heading: "Partners across the globe",
+    body: `These pins mark our partners and collaborators. Together they represent about ${SITE.impact.partnerReach} people today, with a path toward ${SITE.impact.partnerReachPotential}. We work with partners in ${SITE.impact.countries} countries, and that list keeps growing.`,
+    primaryCta: { label: "View all countries", href: "/partners#countries" } satisfies CtaLink,
+    secondaryCta: { label: "Become a partner", href: "/contact" } satisfies CtaLink,
   },
   benefits: {
     label: "Programs",
@@ -244,20 +250,20 @@ export const HOME = {
     cards: [
       {
         id: "students" as const,
-        title: "4,200 students reached",
+        title: `${SITE.impact.students} students reached`,
         description: "Students reached through Budget Bridge programs.",
       },
       {
-        id: "countries" as const,
-        title: "9 countries",
+        id: "partners" as const,
+        title: `${SITE.impact.partnerReach} partner reach`,
         description:
-          "Reach built with NGO partners across Latin America, Africa, and Asia.",
+          `Member reach through our partners and collaborators, with a path toward ${SITE.impact.partnerReachPotential}.`,
       },
       {
-        id: "volunteers" as const,
-        title: "30+ active volunteers",
+        id: "grants" as const,
+        title: `${SITE.impact.grants} in partner grants`,
         description:
-          "Active volunteers across Social Media, Outreach, Curriculum, Research, Public Policy, and Tech.",
+          "Raised from partner grants that fund financial education worldwide.",
       },
     ],
   },

@@ -262,7 +262,7 @@ export function GraphicStatStudents() {
   );
 }
 
-export function GraphicStatCountries() {
+export function GraphicStatPartnerReach() {
   const heights = [40, 55, 48, 70, 62, 80, 58, 74, 88];
 
   return (
@@ -271,9 +271,9 @@ export function GraphicStatCountries() {
       className="aspect-[4/3] w-full"
     >
       <SoftCard className="w-[78%] max-w-[220px] p-4">
-        <MutedLabel>Reach</MutedLabel>
+        <MutedLabel>Partners</MutedLabel>
         <div className="mt-3">
-          <StatValue value={SITE.impact.countries} label="countries" />
+          <StatValue value={SITE.impact.partnerReach} label="member reach" />
         </div>
         <div className="mt-4 flex h-10 items-end gap-1">
           {heights.map((height, index) => (
@@ -289,28 +289,19 @@ export function GraphicStatCountries() {
   );
 }
 
-export function GraphicStatVolunteers() {
-  const avatarColors = ["#d9d4cc", "#c5d0c8", "#c8c4d4", "#d4c8c0"];
-
+export function GraphicStatGrants() {
   return (
     <AtmosphericStage
       atmosphere={MEDIA.atmospheres.softField.src}
       className="aspect-[4/3] w-full"
     >
-      <SoftCard className="w-[78%] max-w-[220px] p-4">
-        <MutedLabel>Team</MutedLabel>
-        <div className="mt-3">
-          <StatValue value={SITE.impact.volunteers} label="active volunteers" />
-        </div>
-        <div className="mt-4 flex -space-x-2">
-          {avatarColors.map((color) => (
-            <span
-              key={color}
-              className="h-7 w-7 rounded-full border-2 border-white"
-              style={{ backgroundColor: color }}
-            />
-          ))}
-        </div>
+      <SoftCard className="px-6 py-5 text-center">
+        <p className="text-[40px] font-medium leading-none tracking-tight text-[#161514]">
+          {SITE.impact.grants}
+        </p>
+        <p className="mt-2 text-[13px] text-[#717071]">
+          raised from partner grants
+        </p>
       </SoftCard>
     </AtmosphericStage>
   );

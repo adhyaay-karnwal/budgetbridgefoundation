@@ -171,6 +171,13 @@ export const PARTNERS = {
     heading: "More partners are on the way",
     body: "We currently have more partners than the ones featured here. The complete list and partnership data are coming soon. Check back for details on each collaboration and the students we reach together.",
   },
+  countries: {
+    label: "Countries",
+    heading: "Where our partners work",
+    body: "Every name below is a partner country. The list is the full set we can share today.",
+    updating:
+      "This list is constantly updating as we add more partners.",
+  },
 } as const;
 
 export const GET_INVOLVED = {

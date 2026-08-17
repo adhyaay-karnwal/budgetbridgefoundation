@@ -71,11 +71,11 @@ export default function ProgramsPage() {
 
       <PageSection>
         <SectionHeading>
-          {SITE.impact.students} students · {SITE.impact.countries} countries ·{" "}
-          {SITE.impact.volunteers} volunteers
+          {SITE.impact.students} students · {SITE.impact.partnerReach} partner
+          reach · {SITE.impact.grants} grants
         </SectionHeading>
         <p className="mt-4 max-w-xl text-[15px] leading-6 text-[#717071]">
-          Impact from Budget Bridge programs worldwide.
+          Impact from Budget Bridge programs and partners worldwide.
         </p>
       </PageSection>
     </main>

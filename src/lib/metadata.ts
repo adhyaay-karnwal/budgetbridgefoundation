@@ -12,7 +12,7 @@ export const SITE_OG_IMAGE = {
   url: "/media/bbf-banner.png",
   width: 3840,
   height: 2160,
-  alt: `${SITE.name} — financial literacy nonprofit teaching money skills to students`,
+  alt: `${SITE.name}, financial literacy nonprofit teaching money skills to students`,
 } as const;
 
 const ROBOTS_INDEX = {
@@ -100,13 +100,11 @@ export const rootMetadata: Metadata = {
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
   }),
-  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? {
-        verification: {
-          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-        },
-      }
-    : {}),
+  verification: {
+    google:
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ??
+      "YbtLUtFxOuM24A6UQsXWo4HgTa_pOqGGCVsUFeDFwmU",
+  },
 };
 
 export function pageMetadata({

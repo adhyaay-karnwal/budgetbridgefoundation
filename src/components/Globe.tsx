@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import createGlobe from "cobe";
+import {
+  PARTNER_COUNTRIES,
+  type PartnerCountry,
+} from "@/lib/partners";
 
-export type GlobeCountry = {
-  id: string;
-  name: string;
-  location: [number, number];
-};
+export type GlobeCountry = PartnerCountry;
 
 type GlobeProps = {
   markers?: GlobeCountry[];
@@ -15,30 +15,8 @@ type GlobeProps = {
   speed?: number;
 };
 
-/**
- * Countries reached by Budget Bridge, pinpointed by country centroid.
- * Spans North America, Latin America, Africa, and Asia.
- */
-export const COUNTRY_MARKERS: GlobeCountry[] = [
-  { id: "usa", name: "USA", location: [39.83, -98.58] },
-  // Latin America
-  { id: "mexico", name: "Mexico", location: [23.63, -102.55] },
-  { id: "colombia", name: "Colombia", location: [4.57, -74.3] },
-  { id: "peru", name: "Peru", location: [-9.19, -75.02] },
-  { id: "brazil", name: "Brazil", location: [-10.77, -52.92] },
-  { id: "argentina", name: "Argentina", location: [-34.6, -58.38] },
-  { id: "chile", name: "Chile", location: [-33.45, -70.67] },
-  // Africa
-  { id: "nigeria", name: "Nigeria", location: [9.08, 8.68] },
-  { id: "ghana", name: "Ghana", location: [7.95, -1.02] },
-  { id: "kenya", name: "Kenya", location: [-1.29, 36.82] },
-  { id: "south-africa", name: "South Africa", location: [-30.56, 22.94] },
-  // Asia
-  { id: "india", name: "India", location: [22.35, 78.66] },
-  { id: "philippines", name: "Philippines", location: [12.88, 121.77] },
-  { id: "vietnam", name: "Vietnam", location: [16.0, 107.9] },
-  { id: "indonesia", name: "Indonesia", location: [-2.55, 118.02] },
-];
+/** Partner countries, pinpointed by country centroid. */
+export const COUNTRY_MARKERS: GlobeCountry[] = PARTNER_COUNTRIES;
 
 export function Globe({
   markers = COUNTRY_MARKERS,
@@ -181,15 +159,15 @@ export function Globe({
             bottom: "anchor(top)",
             left: "anchor(center)",
             translate: "-50% 0",
-            marginBottom: 6,
+            marginBottom: 3,
             pointerEvents: "none",
             display: "flex",
             alignItems: "center",
-            padding: "0.3rem 0.5rem",
+            padding: "0.08rem 0.22rem",
             background: "#1a1a2e",
             color: "#fff",
-            borderRadius: 3,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+            borderRadius: 2,
+            boxShadow: "0 1px 4px rgba(0,0,0,0.18)",
             opacity: `var(--cobe-visible-${m.id}, 0)`,
             filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
             transition: "opacity 0.4s, filter 0.4s",
@@ -197,11 +175,12 @@ export function Globe({
         >
           <span
             style={{
-              fontSize: "0.6rem",
+              fontSize: "0.42rem",
               fontWeight: 500,
-              letterSpacing: "0.08em",
+              letterSpacing: "0.04em",
               textTransform: "uppercase",
               whiteSpace: "nowrap",
+              lineHeight: 1.2,
             }}
           >
             {m.name}
