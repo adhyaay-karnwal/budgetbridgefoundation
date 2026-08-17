@@ -45,9 +45,31 @@ export const HOME_TITLE =
 export const HOME_DESCRIPTION =
   "Budget Bridge Foundation is a student-led financial literacy nonprofit. Free seminars, live tutoring, workshops, and advocacy help students learn budgeting, saving, credit, and money management.";
 
-export function absoluteUrl(path: string): string {
+export function absoluteUrl(path: string, baseUrl: string = SITE.url): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
-  return new URL(normalized, SITE.url).toString();
+  const base = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+  return new URL(normalized, base).toString();
+}
+
+/** Convert display dates like "July 29, 2026" to ISO for sitemaps. */
+export function toSitemapLastModified(date: string | Date): string {
+  if (date instanceof Date) {
+    return date.toISOString();
+  }
+
+  const parsed = Date.parse(date);
+  if (Number.isNaN(parsed)) {
+    return new Date().toISOString();
+  }
+
+  return new Date(parsed).toISOString();
+}
+
+export function resolveSiteBaseUrl(host: string | null): string {
+  if (!host) return SITE.url;
+
+  const protocol = host.includes("localhost") ? "http" : "https";
+  return `${protocol}://${host}`;
 }
 
 export type SitemapRoute = {
@@ -74,7 +96,7 @@ export const SITEMAP_ROUTES: SitemapRoute[] = [
     path: `/blog/${post.slug}`,
     changeFrequency: "monthly" as const,
     priority: 0.75,
-    lastModified: post.date,
+    lastModified: toSitemapLastModified(post.date),
   })),
 ];
 
