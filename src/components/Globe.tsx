@@ -18,29 +18,6 @@ type GlobeProps = {
 /** Partner countries, pinpointed by country centroid. */
 export const COUNTRY_MARKERS: GlobeCountry[] = PARTNER_COUNTRIES;
 
-/** Labels for a geographic spread so clustered regions stay readable. */
-const LABELED_COUNTRY_IDS = new Set([
-  "usa",
-  "canada",
-  "mexico",
-  "brazil",
-  "argentina",
-  "uk",
-  "france",
-  "germany",
-  "nigeria",
-  "south-africa",
-  "kenya",
-  "india",
-  "china",
-  "japan",
-  "australia",
-  "uae",
-  "egypt",
-  "indonesia",
-  "philippines",
-]);
-
 export function Globe({
   markers = COUNTRY_MARKERS,
   className = "",
@@ -118,7 +95,7 @@ export function Globe({
         markerElevation: 0,
         markers: markers.map((m) => ({
           location: m.location,
-          size: 0.014,
+          size: 0.025,
           id: m.id,
         })),
         arcs: [],
@@ -173,44 +150,43 @@ export function Globe({
           touchAction: "none",
         }}
       />
-      {markers
-        .filter((m) => LABELED_COUNTRY_IDS.has(m.id))
-        .map((m) => (
-          <div
-            key={m.id}
+      {markers.map((m) => (
+        <div
+          key={m.id}
+          style={{
+            position: "absolute",
+            positionAnchor: `--cobe-${m.id}`,
+            bottom: "anchor(top)",
+            left: "anchor(center)",
+            translate: "-50% 0",
+            marginBottom: 3,
+            pointerEvents: "none",
+            display: "flex",
+            alignItems: "center",
+            padding: "0.08rem 0.22rem",
+            background: "#1a1a2e",
+            color: "#fff",
+            borderRadius: 2,
+            boxShadow: "0 1px 4px rgba(0,0,0,0.18)",
+            opacity: `var(--cobe-visible-${m.id}, 0)`,
+            filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
+            transition: "opacity 0.4s, filter 0.4s",
+          }}
+        >
+          <span
             style={{
-              position: "absolute",
-              positionAnchor: `--cobe-${m.id}`,
-              bottom: "anchor(top)",
-              left: "anchor(center)",
-              translate: "-50% 0",
-              marginBottom: 6,
-              pointerEvents: "none",
-              display: "flex",
-              alignItems: "center",
-              padding: "0.3rem 0.5rem",
-              background: "#1a1a2e",
-              color: "#fff",
-              borderRadius: 3,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-              opacity: `var(--cobe-visible-${m.id}, 0)`,
-              filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
-              transition: "opacity 0.4s, filter 0.4s",
+              fontSize: "0.42rem",
+              fontWeight: 500,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+              whiteSpace: "nowrap",
+              lineHeight: 1.2,
             }}
           >
-            <span
-              style={{
-                fontSize: "0.6rem",
-                fontWeight: 500,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {m.name}
-            </span>
-          </div>
-        ))}
+            {m.name}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
