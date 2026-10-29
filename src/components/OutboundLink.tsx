@@ -7,8 +7,13 @@ type OutboundLinkProps = {
   href: string;
   children: ReactNode;
   className?: string;
-  /** Instagram uses brand gradient instead of gold */
-  variant?: "gold" | "instagram";
+  /**
+   * "gold" — ink text with a marigold underline that fills in on hover.
+   * "light" — same treatment for dark color blocks.
+   * "ink" — ink underline, for marigold surfaces.
+   * "instagram" — Instagram brand gradient on the label.
+   */
+  variant?: "gold" | "light" | "ink" | "instagram";
   showArrow?: boolean;
 };
 
@@ -20,10 +25,15 @@ function isExternalHref(href: string): boolean {
   );
 }
 
-/**
- * Content links — gold + diagonal arrow so they’re obviously clickable.
- * Instagram variant uses the Instagram gradient on the label.
- */
+const LABEL_CLASS = {
+  gold: "bg-[linear-gradient(var(--marigold),var(--marigold))] bg-[length:100%_3px] bg-bottom bg-no-repeat pb-0.5 text-ink transition-[background-size] duration-300 group-hover/link:bg-[length:100%_100%]",
+  light:
+    "bg-[linear-gradient(var(--marigold),var(--marigold))] bg-[length:100%_3px] bg-bottom bg-no-repeat pb-0.5 text-current transition-[background-size,color] duration-300 group-hover/link:bg-[length:100%_100%] group-hover/link:text-ink",
+  ink: "bg-[linear-gradient(var(--ink),var(--ink))] bg-[length:100%_2px] bg-bottom bg-no-repeat pb-0.5 text-ink transition-[background-size,color] duration-300 group-hover/link:bg-[length:100%_100%] group-hover/link:text-marigold",
+  instagram: "bbf-link-instagram",
+} as const;
+
+/** Content links — underlined in marigold so they read as clickable. */
 export function OutboundLink({
   href,
   children,
@@ -32,30 +42,25 @@ export function OutboundLink({
   showArrow = true,
 }: OutboundLinkProps) {
   const external = isExternalHref(href);
-  const labelClass =
-    variant === "instagram"
-      ? "bbf-link-instagram"
-      : "text-[#b8952c] transition-colors hover:text-[#9a7a24]";
 
   const content = (
     <span className="inline-flex items-center gap-1">
-      <span className={labelClass}>{children}</span>
+      <span className={LABEL_CLASS[variant]}>{children}</span>
       {showArrow ? (
         <Icon
           icon={ArrowUpRight01Icon}
-          size={13}
-          className={
-            variant === "instagram"
-              ? "shrink-0 text-[#e1306c]"
-              : "shrink-0 text-[#b8952c]"
-          }
+          size={14}
+          strokeWidth={2}
+          className={`shrink-0 transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 ${
+            variant === "instagram" ? "text-[#e1306c]" : ""
+          }`}
           aria-hidden
         />
       ) : null}
     </span>
   );
 
-  const classes = `inline-flex no-underline ${className}`;
+  const classes = `group/link inline-flex font-medium no-underline ${className}`;
 
   if (external) {
     return (

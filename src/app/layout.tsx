@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Caveat, Fraunces } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { IntroProvider } from "@/components/intro/IntroProvider";
 import { PageEnd } from "@/components/PageEnd";
 import { SiteJsonLd } from "@/components/seo/JsonLd";
 import { rootMetadata } from "@/lib/metadata";
@@ -34,6 +34,21 @@ const acuminPro = localFont({
   variable: "--font-acumin-pro",
 });
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["SOFT", "WONK", "opsz"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-caveat",
+  display: "swap",
+});
+
 export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
@@ -42,15 +57,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${acuminPro.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col font-sans">
+    <html lang="en" className={`${acuminPro.variable} ${fraunces.variable} ${caveat.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col bg-cream font-sans text-ink">
         <SiteJsonLd />
-        <IntroProvider>
-          <Header />
-          <div className="flex-1">{children}</div>
-          <PageEnd />
-          <Footer />
-        </IntroProvider>
+        <Header />
+        <div className="flex-1">{children}</div>
+        <PageEnd />
+        <Footer />
       </body>
     </html>
   );

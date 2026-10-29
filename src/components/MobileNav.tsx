@@ -1,12 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowDown01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import { AccentButton } from "@/components/AccentButton";
+import { BrandMark } from "@/components/BrandMark";
 import { Icon } from "@/components/Icon";
+import { DoodleBridge } from "@/components/playful/Doodles";
 import { NAV, type NavItem } from "@/lib/site";
+import { TONES, toneAt } from "@/lib/tones";
 
 type MobileNavProps = {
   open: boolean;
@@ -30,13 +32,14 @@ function MobileNavAccordion({
         type="button"
         onClick={() => setExpanded((prev) => !prev)}
         aria-expanded={expanded}
-        className="flex w-full items-center justify-between py-4 text-left text-[15px] leading-6 text-[#161514]"
+        className="font-display flex w-full items-center justify-between py-3 text-left text-[34px] leading-tight text-ink"
       >
         <span>{label}</span>
         <Icon
           icon={ArrowDown01Icon}
-          size={18}
-          className={`shrink-0 text-[#161514] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          size={24}
+          strokeWidth={2}
+          className={`shrink-0 text-ink transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             expanded ? "rotate-180" : ""
           }`}
           aria-hidden
@@ -49,14 +52,19 @@ function MobileNavAccordion({
         }`}
       >
         <div className="overflow-hidden">
-          <ul className="mb-1 ml-3 space-y-0 border-l border-[#e8e8e8] pl-4">
-            {items.map((sub) => (
+          <ul className="mb-3 space-y-1 pl-1">
+            {items.map((sub, index) => (
               <li key={sub.href}>
                 <Link
                   href={sub.href}
                   onClick={onNavigate}
-                  className="block py-2.5 text-[15px] leading-6 text-[#717071] transition-colors hover:text-[#161514]"
+                  tabIndex={expanded ? undefined : -1}
+                  className="flex items-center gap-3 py-2 text-[17px] leading-6 text-ink-soft transition-colors hover:text-ink"
                 >
+                  <span
+                    className={`h-3 w-3 rounded-full border-2 border-ink ${TONES[toneAt(index)].bg}`}
+                    aria-hidden
+                  />
                   {sub.title}
                 </Link>
               </li>
@@ -74,18 +82,21 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
 
   useEffect(() => {
     if (open) {
-      setMounted(true);
       const frame = requestAnimationFrame(() => {
+        setMounted(true);
         requestAnimationFrame(() => setVisible(true));
       });
       document.body.style.overflow = "hidden";
       return () => cancelAnimationFrame(frame);
     }
 
-    setVisible(false);
+    const frame = requestAnimationFrame(() => setVisible(false));
     document.body.style.overflow = "";
     const timer = setTimeout(() => setMounted(false), 320);
-    return () => clearTimeout(timer);
+    return () => {
+      cancelAnimationFrame(frame);
+      clearTimeout(timer);
+    };
   }, [open]);
 
   useEffect(() => {
@@ -103,58 +114,52 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] sm:hidden"
+      className="fixed inset-0 z-[100] lg:hidden"
       role="dialog"
       aria-modal="true"
       aria-label="Mobile navigation"
     >
       <div
-        className={`flex h-full w-full flex-col bg-white transition-transform duration-[320ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          visible ? "translate-x-0" : "-translate-x-full"
+        className={`grain flex h-full w-full flex-col bg-cream transition-[translate,opacity] duration-[320ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          visible ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
         }`}
       >
         <div className="flex h-20 shrink-0 items-center content-gutter-x">
-          <Link
-            href="/"
-            onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center"
-          >
-            <Image
-              src="/bbf-black.svg"
-              alt="Budget Bridge Foundation"
-              width={32}
-              height={32}
-              className="h-8 w-8 shrink-0"
-            />
+          <Link href="/" onClick={onClose} className="flex items-center gap-3">
+            <BrandMark />
+            <span className="font-display text-[22px] leading-none text-ink">
+              Budget Bridge
+            </span>
           </Link>
 
           <button
             type="button"
             onClick={onClose}
-            className="ml-auto flex items-center justify-center"
+            className="ml-auto flex h-11 w-11 items-center justify-center rounded-full border-2 border-ink bg-marigold"
             aria-label="Close menu"
           >
             <Icon
               icon={Cancel01Icon}
               size={20}
-              className="text-foreground"
+              strokeWidth={2}
+              className="text-ink"
               aria-hidden
             />
           </button>
         </div>
 
         <nav
-          className="flex-1 overflow-y-auto content-gutter-x pb-8"
+          className="flex-1 overflow-y-auto content-gutter-x pb-8 pt-4"
           aria-label="Primary"
         >
           <ul>
             {NAV.map((item) => (
-              <li key={item.label}>
+              <li key={item.label} className="border-b-2 border-dashed border-line">
                 {item.kind === "link" ? (
                   <Link
                     href={item.href}
                     onClick={onClose}
-                    className="block py-4 text-[15px] leading-6 text-[#161514]"
+                    className="font-display block py-3 text-[34px] leading-tight text-ink"
                   >
                     {item.label}
                   </Link>
@@ -170,10 +175,11 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
             ))}
           </ul>
 
-          <div className="mt-8 border-t border-[#f0f0f0] pt-8">
-            <AccentButton href="/get-involved" onClick={onClose}>
+          <div className="mt-10 flex items-center justify-between gap-4">
+            <AccentButton href="/get-involved" variant="marigold" onClick={onClose}>
               Volunteer
             </AccentButton>
+            <DoodleBridge size={72} className="text-marigold-deep" />
           </div>
         </nav>
       </div>

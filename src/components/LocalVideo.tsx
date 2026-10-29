@@ -8,7 +8,7 @@ type LocalVideoProps = {
 };
 
 const ASPECT_CLASS = {
-  portrait: "aspect-[9/16] max-h-[520px]",
+  portrait: "aspect-[9/16] w-full",
   landscape: "aspect-video",
 } as const;
 
@@ -21,7 +21,7 @@ export function LocalVideo({
 }: LocalVideoProps) {
   return (
     <div
-      className={`overflow-hidden rounded-[2px] bg-[#111] ${ASPECT_CLASS[aspect]} ${className}`}
+      className={`overflow-hidden rounded-[14px] bg-ink ${ASPECT_CLASS[aspect]} ${className}`}
     >
       <video
         src={src}

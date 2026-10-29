@@ -31,8 +31,6 @@ export const FOUNDERS = [
 
 export type Founder = (typeof FOUNDERS)[number];
 
-const TEAM_PLACEHOLDER = MEDIA.team.placeholder.src;
-
 export type TeamMember = {
   name: string;
   role: string;
@@ -72,10 +70,6 @@ export const EXECUTIVE_TEAM: TeamMember[] = [
       "Director of LAMPS (Legislation, Acquisitions, Mergers, Partnerships, Scholarships)",
   },
 ];
-
-export function teamMemberImage(member: TeamMember): string {
-  return member.image ?? TEAM_PLACEHOLDER;
-}
 
 /** Page copy — factual text verified against BBF sources */
 

@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageSection } from "@/components/PageChrome";
+import { DoodleHeart } from "@/components/playful/Doodles";
+import { ReadingProgress } from "@/components/playful/ReadingProgress";
 import { ArticleJsonLd } from "@/components/seo/JsonLd";
 import { BLOG, getBlogPost } from "@/lib/content";
 import { articleMetadata } from "@/lib/metadata";
@@ -44,7 +46,8 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <main className="bg-white">
+    <main>
+      <ReadingProgress />
       <ArticleJsonLd
         title={post.title}
         description={post.excerpt}
@@ -54,50 +57,61 @@ export default async function BlogPostPage({ params }: PageProps) {
         author={post.author}
       />
 
-      <header className="content-gutter-x pb-10 pt-28">
-        <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-[#a3a3a3]">
-          {BLOG.label}
-        </p>
-        <h1 className="mt-4 max-w-4xl text-[36px] font-medium leading-[1.1] tracking-tight text-[#161514] sm:text-[48px]">
+      <header className="content-gutter-x pb-10 pt-12 text-center sm:pt-16">
+        <Link
+          href="/blog"
+          className="page-enter-text inline-flex items-center gap-2 rounded-full border-2 border-ink bg-lilac px-4 py-1.5 text-[13px] font-medium uppercase tracking-[0.14em] text-ink transition-transform hover:-translate-y-0.5"
+        >
+          ← {BLOG.label}
+        </Link>
+        <h1 className="font-display page-enter-text-delay mx-auto mt-6 max-w-4xl text-[40px] leading-[1.05] text-ink sm:text-[60px]">
           {post.title}
         </h1>
+        <p className="page-enter-body mt-6 text-[14px] font-medium uppercase tracking-[0.12em] text-ink-soft">
+          {post.author} · <time dateTime={post.date}>{post.date}</time> · {post.category}
+        </p>
       </header>
 
       <PageSection className="content-gutter-x pb-12 pt-4">
-        <div className="relative aspect-[21/9] min-h-[220px] w-full overflow-hidden rounded-[2px] bg-[#ececec]">
+        <div className="relative mx-auto aspect-[21/9] min-h-[220px] w-full max-w-5xl overflow-hidden rounded-[30px] border-2 border-ink bg-paper shadow-sticker">
           <Image
             src={post.cover.src}
             alt={post.cover.alt}
             fill
             className="object-cover"
-            sizes="100vw"
-            priority
+            sizes="(max-width: 1100px) 100vw, 1000px"
+            preload
           />
-        </div>
-        <div className="mt-6 grid grid-cols-3 items-center gap-4 text-[15px] text-[#717071]">
-          <time dateTime={post.date}>{post.date}</time>
-          <span className="text-center">{post.author}</span>
-          <span className="text-right">{post.category}</span>
         </div>
       </PageSection>
 
       <PageSection className="content-gutter-x pb-16 pt-4">
-        <article className="mx-auto max-w-2xl space-y-6">
-          {post.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="text-[17px] leading-8 text-[#161514]">
+        <article className="mx-auto max-w-2xl space-y-7">
+          {post.paragraphs.map((paragraph, index) => (
+            <p
+              key={paragraph}
+              className={`text-[19px] leading-9 text-ink ${
+                index === 0
+                  ? "first-letter:font-display first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-[78px] first-letter:leading-[0.8] first-letter:text-marigold-deep"
+                  : ""
+              }`}
+            >
               {paragraph}
             </p>
           ))}
-          <p className="pt-4 text-[15px] text-[#717071]">
+          <p className="flex items-center gap-3 pt-6 font-hand text-[28px] text-ink-soft">
+            <DoodleHeart size={36} className="text-coral" />
             By {post.author}
           </p>
         </article>
-        <Link
-          href="/blog"
-          className="mt-14 inline-block text-[15px] text-[#161514] transition-colors hover:text-[#717071]"
-        >
-          ← All posts
-        </Link>
+        <div className="mx-auto mt-14 max-w-2xl border-t-2 border-dashed border-line pt-8">
+          <Link
+            href="/blog"
+            className="font-display text-[22px] text-ink transition-colors hover:text-teal"
+          >
+            ← All posts
+          </Link>
+        </div>
       </PageSection>
     </main>
   );

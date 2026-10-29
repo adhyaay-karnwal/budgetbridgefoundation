@@ -127,16 +127,17 @@ export const SITE = {
   },
 };
 
-/** Hero copy — Natural structure, BBF words */
+/** Hero copy */
 export const HERO = {
   announcement: {
     title: "The adolescent window in financial education",
     date: "Jul 29",
     href: "/blog/adolescent-window-financial-education",
   },
-  headline: "Budget Bridge Foundation teaches money skills.",
-  muted:
-    "Seminars. Tutoring. Workshops. Advocacy. Curriculum. Everything students need to thrive *",
+  headlineBefore: "Money skills for",
+  headlineHighlight: "every student",
+  headlineAfter: "everywhere.",
+  body: "Budget Bridge Foundation is a student-led 501(c)(3) bridging the financial literacy gap through seminars, tutoring, workshops, competitions, and advocacy.",
   primaryCta: { label: "Volunteer with us", href: "/get-involved" } satisfies CtaLink,
   secondaryCta: { label: "Talk to the team", href: "/contact" } satisfies CtaLink,
 };
@@ -275,21 +276,21 @@ export const HOME = {
         title:
           "From GDP to writing a check: Closing the financial literacy gap in Parsippany schools",
         href: "https://www.tapinto.net/towns/parsippany/articles/from-gdp-to-writing-a-check-closing-the-financial-literacy-gap-in-parsippany-schools",
-        tone: "bg-[#1e3a5f]",
+        tone: "forest" as const,
       },
       {
         outlet: "Parsippany Focus",
         title:
           "Letter to the editor: From GDP to writing a check — closing the financial literacy gap in Parsippany schools",
         href: "https://parsippanyfocus.com/letter-to-the-editor-from-gdp-to-writing-a-check-closing-the-financial-literacy-gap-in-parsippany-schools/",
-        tone: "bg-[#2f4a3c]",
+        tone: "teal" as const,
       },
       {
         outlet: "Board of Education",
         title:
           "Founder testimony at Randolph and Parsippany Board of Education meetings",
         href: "/advocacy#testimony",
-        tone: "bg-[#3d3229]",
+        tone: "coral" as const,
       },
     ],
   },
@@ -322,8 +323,10 @@ export const HOME = {
     ],
   },
   closing: {
-    line1: "Empowering Financial Futures.",
-    line2: "Volunteer with Budget Bridge.",
+    kicker: "Ready to cross the bridge?",
+    headlineBefore: "Empowering",
+    headlineHighlight: "financial futures",
+    headlineAfter: "together.",
     primaryCta: { label: "Volunteer with us", href: "/get-involved" } satisfies CtaLink,
     secondaryCta: { label: "Talk to the team", href: "/contact" } satisfies CtaLink,
   },

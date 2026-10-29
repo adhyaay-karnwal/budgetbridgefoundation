@@ -89,9 +89,9 @@ export function Globe({
         diffuse: 1.5,
         mapSamples: 16000,
         mapBrightness: 10,
-        baseColor: [1, 1, 1],
-        markerColor: [0.72, 0.58, 0.17], // brand gold
-        glowColor: [0.94, 0.93, 0.91],
+        baseColor: [1, 0.98, 0.93], // cream
+        markerColor: [0.93, 0.42, 0.3], // coral
+        glowColor: [1, 0.98, 0.93],
         markerElevation: 0,
         markers: markers.map((m) => ({
           location: m.location,
@@ -163,10 +163,10 @@ export function Globe({
             pointerEvents: "none",
             display: "flex",
             alignItems: "center",
-            padding: "0.08rem 0.22rem",
-            background: "#1a1a2e",
-            color: "#fff",
-            borderRadius: 2,
+            padding: "0.1rem 0.3rem",
+            background: "#1d1a16",
+            color: "#fbf6ec",
+            borderRadius: 999,
             boxShadow: "0 1px 4px rgba(0,0,0,0.18)",
             opacity: `var(--cobe-visible-${m.id}, 0)`,
             filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
@@ -175,7 +175,7 @@ export function Globe({
         >
           <span
             style={{
-              fontSize: "0.42rem",
+              fontSize: "0.5rem",
               fontWeight: 500,
               letterSpacing: "0.04em",
               textTransform: "uppercase",
