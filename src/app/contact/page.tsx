@@ -49,6 +49,7 @@ const REASONS = [
   { label: "Volunteer", href: "/get-involved", tone: "teal" },
   { label: "Book a seminar", href: `mailto:${CONTACT.email}?subject=Seminar%20request`, tone: "lilac" },
   { label: "Become a partner", href: `mailto:${CONTACT.email}?subject=Partnership`, tone: "marigold" },
+  { label: "Request materials", href: "/vault#request", tone: "coral" },
 ] as const satisfies readonly { label: string; href: string; tone: Tone }[];
 
 export default function ContactPage() {

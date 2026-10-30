@@ -41,7 +41,7 @@ export type TeamMember = {
 export const EXECUTIVE_TEAM: TeamMember[] = [
   {
     name: "Adhyaay Karnwal",
-    role: "Director of Product/Tech",
+    role: "Chief Technology Officer",
     image: MEDIA.team.adhyaay.src,
   },
   {
@@ -77,7 +77,7 @@ export const ABOUT = {
   label: "About",
   title: "Bridging the financial literacy gap",
   intro:
-    "Budget Bridge is a student-led 501(c)(3) that teaches personal finance and supports equitable financial literacy legislation. We work with schools, community groups, policymakers, and startups to democratize financial education.",
+    "Budget Bridge is a student-led 501(c)(3) working across soccer, media, education, and financial literacy. We teach personal finance, support equitable financial literacy legislation, and work with schools, community groups, policymakers, and startups to democratize financial education.",
   teach:
     "We teach budgeting, saving, credit, and planning with simple steps and real examples. By training volunteers and building resources for students, we expand our reach and strengthen long-term financial stability in the communities we serve.",
   story: {
@@ -89,13 +89,43 @@ export const ABOUT = {
     label: "Executive team",
     heading: "Executive team",
   },
+  /**
+   * Board and alumni groups. Add people to `members` to replace the
+   * "announcing soon" placeholder with team cards.
+   */
+  groups: [
+    {
+      id: "board",
+      label: "Current board",
+      heading: "Board of directors",
+      body: "The students steering Budget Bridge this year.",
+      tone: "teal",
+      members: [] as TeamMember[],
+    },
+    {
+      id: "adult-board",
+      label: "Adult board",
+      heading: "Adult advisory board",
+      body: "Educators, professionals, and mentors who guide our work.",
+      tone: "lilac",
+      members: [] as TeamMember[],
+    },
+    {
+      id: "alumni",
+      label: "Alumni",
+      heading: "Our alumni",
+      body: "Students who helped build Budget Bridge and moved on to what’s next.",
+      tone: "coral",
+      members: [] as TeamMember[],
+    },
+  ],
 } as const;
 
 export const PROGRAMS = {
   label: "Programs",
   title: "How Budget Bridge reaches students",
   description:
-    "Education, seminars, and advocacy work together to expand access to financial literacy.",
+    "Soccer, media, education, and advocacy work together to expand access to financial literacy.",
   cards: [
     {
       title: "Education & tutoring",
@@ -110,12 +140,168 @@ export const PROGRAMS = {
       href: "/programs/seminars",
     },
     {
+      title: "Soccer & media",
+      description:
+        "Money lessons through the world’s game, plus videos and stories that travel.",
+      href: "/programs/soccer-and-media",
+    },
+    {
       title: "Policy & advocacy",
       description:
         "Board of Education advocacy and state legislation for financial literacy.",
       href: "/advocacy",
     },
   ],
+} as const;
+
+export const SOCCER_MEDIA = {
+  label: "Soccer & Media",
+  title: "Money skills, on the pitch and on screen",
+  description:
+    "Budget Bridge is officially a soccer, media, education, and financial literacy organization. Soccer and media let us meet students where they already are.",
+  soccer: {
+    label: "Soccer",
+    heading: "The world’s game is full of money lessons",
+    body: "Soccer is loved in nearly every country our partners work in, and it is packed with real money decisions: what a club spends on kits and travel, how ticket prices are set, how contracts and transfers work. We use the sport students already care about as a way into budgeting, saving, and planning.",
+    topics: [
+      {
+        label: "Club budgets",
+        description: "Plan a season: kits, fields, travel, and fees.",
+        doodle: "chart",
+        tone: "marigold",
+      },
+      {
+        label: "Contracts & careers",
+        description: "What a pro’s paycheck teaches about taxes and saving.",
+        doodle: "coin",
+        tone: "teal",
+      },
+      {
+        label: "Game plans",
+        description: "A savings goal works like a game plan: small passes add up.",
+        doodle: "star",
+        tone: "coral",
+      },
+      {
+        label: "On the field",
+        description: "Time with a ball, paired with short, friendly money talks.",
+        doodle: "soccer",
+        tone: "lilac",
+      },
+    ],
+  },
+  media: {
+    label: "Media",
+    heading: "Stories that spread money skills",
+    body: "Financial education should be easy to find and easy to share. Our media work turns lessons into short videos, social posts, articles, and student stories, so one budgeting tip can travel much further than one classroom.",
+    formats: [
+      { label: "Short videos", doodle: "camera", tone: "marigold" },
+      { label: "Social", doodle: "megaphone", tone: "sky" },
+      { label: "Articles", doodle: "book", tone: "blush" },
+      { label: "Student voices", doodle: "people", tone: "lilac" },
+    ],
+  },
+} as const;
+
+export type VaultBox = {
+  id: string;
+  title: string;
+  description: string;
+  contents: string[];
+  doodle:
+    | "book"
+    | "chart"
+    | "bulb"
+    | "soccer"
+    | "camera"
+    | "megaphone"
+    | "people"
+    | "globe";
+  tone: "marigold" | "teal" | "coral" | "lilac" | "forest" | "sky" | "blush" | "cream";
+};
+
+export const VAULT = {
+  label: "The Vault",
+  title: "Free materials for teaching money skills",
+  description:
+    "Lesson plans, seminar slides, activities, and toolkits from the Budget Bridge team. Pick what you need and we will send it your way.",
+  boxes: {
+    label: "Inside the Vault",
+    heading: "Choose your materials",
+    body: "Add any boxes to your request, then send it from the form below. Everything in the Vault is free for schools, students, partners, and families.",
+  },
+  request: {
+    label: "Request materials",
+    heading: "Tell us what you need",
+    body: "Your request opens as a ready-to-send email to the team. We reply by email with the materials or a time to talk.",
+    roles: ["Teacher or school", "Student", "Partner organization", "Parent or family", "Other"],
+  },
+  items: [
+    {
+      id: "lessons",
+      title: "Lesson plans & curriculum",
+      description: "Step-by-step lessons on budgeting, saving, credit, and planning for ages 10–16.",
+      contents: ["Lesson plans", "Teacher notes", "Quizzes"],
+      doodle: "book",
+      tone: "marigold",
+    },
+    {
+      id: "seminar-slides",
+      title: "Seminar slide decks",
+      description: "The slides we use in free elementary and middle school seminars.",
+      contents: ["Slides", "Speaker notes"],
+      doodle: "chart",
+      tone: "teal",
+    },
+    {
+      id: "activities",
+      title: "Worksheets & activities",
+      description: "Printable games and hands-on activities, like our Save, Spend, Share jars.",
+      contents: ["Worksheets", "Games", "Answer keys"],
+      doodle: "bulb",
+      tone: "coral",
+    },
+    {
+      id: "soccer-kit",
+      title: "Soccer money kit",
+      description: "Activities that connect the world’s game to budgeting, saving, and planning.",
+      contents: ["Activity guides", "Discussion prompts"],
+      doodle: "soccer",
+      tone: "forest",
+    },
+    {
+      id: "media-kit",
+      title: "Media kit",
+      description: "Logos, brand colors, photos, and a short description of Budget Bridge.",
+      contents: ["Logos", "Photos", "Fact sheet"],
+      doodle: "camera",
+      tone: "lilac",
+    },
+    {
+      id: "advocacy-toolkit",
+      title: "Advocacy toolkit",
+      description: "How we approach Board of Education meetings and financial literacy bills.",
+      contents: ["Testimony tips", "Bill summaries"],
+      doodle: "megaphone",
+      tone: "sky",
+    },
+    {
+      id: "volunteer-training",
+      title: "Volunteer training",
+      description: "Guides that get new volunteers ready to teach and tutor with confidence.",
+      contents: ["Training guide", "Session checklists"],
+      doodle: "people",
+      tone: "blush",
+    },
+    {
+      id: "partner-pack",
+      title: "Partner starter pack",
+      description: "Program structures that NGOs and schools can adapt for their students.",
+      contents: ["Program outline", "Planning templates"],
+      doodle: "globe",
+      tone: "cream",
+    },
+  ] satisfies VaultBox[],
 } as const;
 
 export const EDUCATION = {
@@ -164,6 +350,11 @@ export const PARTNERS = {
     label: "Coming soon",
     heading: "More partners are on the way",
     body: "We currently have more partners than the ones featured here. The complete list and partnership data are coming soon. Check back for details on each collaboration and the students we reach together.",
+  },
+  newest: {
+    label: "Newest partner",
+    heading: "Welcome to the network, Guyana!",
+    body: "Guyana is officially a Budget Bridge partner and the newest pin on our globe. More on what we are building together soon.",
   },
   countries: {
     label: "Countries",

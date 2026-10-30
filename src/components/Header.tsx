@@ -85,7 +85,7 @@ export default function Header() {
         </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 lg:flex xl:gap-1"
           aria-label="Primary"
         >
           {NAV.map((item) => {
@@ -95,7 +95,7 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className="rounded-full px-4 py-2 text-[15px] font-medium leading-6 text-ink transition-colors hover:bg-paper aria-[current=page]:bg-marigold"
+                  className="whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium leading-6 text-ink transition-colors hover:bg-paper aria-[current=page]:bg-marigold xl:px-4"
                 >
                   {item.label}
                 </Link>
@@ -121,7 +121,7 @@ export default function Header() {
                   aria-expanded={isOpen}
                   aria-controls={menuId}
                   onClick={() => setOpenMenu(isOpen ? null : item.label)}
-                  className={`flex items-center gap-1 rounded-full px-4 py-2 text-[15px] font-medium leading-6 text-ink transition-colors hover:bg-paper ${
+                  className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium leading-6 text-ink transition-colors hover:bg-paper xl:px-4 ${
                     sectionActive ? "bg-marigold hover:bg-marigold" : ""
                   }`}
                 >
