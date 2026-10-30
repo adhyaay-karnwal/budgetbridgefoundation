@@ -39,9 +39,19 @@ export const NAV: NavItem[] = [
         description: "Free sessions for elementary and middle schools",
         href: "/programs/seminars",
       },
+      {
+        title: "Soccer & Media",
+        description: "Money lessons on the pitch and on screen",
+        href: "/programs/soccer-and-media",
+      },
+      {
+        title: "Advocacy",
+        description: "Board of Education and state legislation work",
+        href: "/advocacy",
+      },
     ],
   },
-  { label: "Advocacy", href: "/advocacy", kind: "link" },
+  { label: "Vault", href: "/vault", kind: "link" },
   { label: "Partners", href: "/partners", kind: "link" },
   {
     label: "About",
@@ -51,6 +61,11 @@ export const NAV: NavItem[] = [
         title: "Our story",
         description: "How four students started Budget Bridge",
         href: "/about",
+      },
+      {
+        title: "Our team",
+        description: "Founders, executive team, boards, and alumni",
+        href: "/about#team",
       },
       {
         title: "Press",
@@ -75,11 +90,16 @@ export const FOOTER_COLUMNS = [
       { label: "Overview", href: "/programs" },
       { label: "Education", href: "/programs/education" },
       { label: "Seminars", href: "/programs/seminars" },
+      { label: "Soccer & Media", href: "/programs/soccer-and-media" },
+      { label: "Policy & Advocacy", href: "/advocacy" },
     ],
   },
   {
-    title: "Advocacy",
-    links: [{ label: "Policy & Advocacy", href: "/advocacy" }],
+    title: "Resources",
+    links: [
+      { label: "The Vault", href: "/vault" },
+      { label: "Request materials", href: "/vault#request" },
+    ],
   },
   {
     title: "About",
@@ -119,6 +139,8 @@ export const SITE = {
   instagramHandle: "@budgetbridgefoundation",
   ein: "39-3370086",
   tagline: "Empowering futures through financial education.",
+  /** What BBF officially is — shown as stickers across the site. */
+  focus: "Soccer · Media · Education · Financial literacy",
   impact: {
     students: "45,000",
     partnerReach: "650,000",
@@ -130,14 +152,14 @@ export const SITE = {
 /** Hero copy */
 export const HERO = {
   announcement: {
-    title: "The adolescent window in financial education",
-    date: "Jul 29",
-    href: "/blog/adolescent-window-financial-education",
+    tag: "New partner",
+    title: "Welcome, Guyana! Our newest partner country",
+    href: "/partners#countries",
   },
   headlineBefore: "Money skills for",
   headlineHighlight: "every student",
   headlineAfter: "everywhere.",
-  body: "Budget Bridge Foundation is a student-led 501(c)(3) bridging the financial literacy gap through seminars, tutoring, workshops, competitions, and advocacy.",
+  body: "Budget Bridge Foundation is a student-led 501(c)(3) for soccer, media, education, and financial literacy. We use the game students love, stories worth sharing, and hands-on lessons to bridge the financial literacy gap.",
   primaryCta: { label: "Volunteer with us", href: "/get-involved" } satisfies CtaLink,
   secondaryCta: { label: "Talk to the team", href: "/contact" } satisfies CtaLink,
 };
@@ -147,6 +169,56 @@ export const HERO = {
  * Do not invent facts; keep marketing framing light around verified text.
  */
 export const HOME = {
+  pillars: {
+    label: "What we do",
+    heading: "Four pillars, one bridge",
+    body: "Budget Bridge is officially a soccer, media, education, and financial literacy organization. Each pillar is a different way in to the same goal: money skills for every student.",
+    items: [
+      {
+        id: "soccer",
+        title: "Soccer",
+        description:
+          "The world’s game as a doorway to money skills: club budgets, contracts, and game plans.",
+        href: "/programs/soccer-and-media#soccer",
+        doodle: "soccer",
+        tone: "forest",
+      },
+      {
+        id: "media",
+        title: "Media",
+        description:
+          "Videos, social posts, articles, and student stories that make money skills easy to share.",
+        href: "/programs/soccer-and-media#media",
+        doodle: "camera",
+        tone: "coral",
+      },
+      {
+        id: "education",
+        title: "Education",
+        description:
+          "Live tutoring, workshops, curriculum, and free seminars in elementary and middle schools.",
+        href: "/programs/education",
+        doodle: "book",
+        tone: "sky",
+      },
+      {
+        id: "financial-literacy",
+        title: "Financial literacy",
+        description:
+          "Budgeting, saving, credit, and planning, plus advocacy so every student graduates ready.",
+        href: "/programs",
+        doodle: "coin",
+        tone: "marigold",
+      },
+    ],
+  },
+  vault: {
+    label: "The Vault",
+    heading: "Free materials, ready when you are",
+    body: "Lesson plans, seminar slides, activities, soccer money drills, and toolkits. Teachers, students, partners, and parents can request what they need from the Vault.",
+    primaryCta: { label: "Open the Vault", href: "/vault" } satisfies CtaLink,
+    secondaryCta: { label: "Request materials", href: "/vault#request" } satisfies CtaLink,
+  },
   mission: {
     label: "Mission",
     heading: "Our Mission",

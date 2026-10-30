@@ -3,6 +3,7 @@ import { PageHero, PageSection } from "@/components/PageChrome";
 import { SectionHeading, SectionLabel } from "@/components/home/primitives";
 import { ColorCard } from "@/components/playful/ColorCard";
 import { CountUp } from "@/components/playful/CountUp";
+import type { DoodleName } from "@/components/playful/Doodles";
 import { Reveal } from "@/components/playful/Reveal";
 import { PROGRAMS } from "@/lib/content";
 import { MEDIA, type MediaImage } from "@/lib/media";
@@ -12,19 +13,20 @@ import { TONES, type Tone } from "@/lib/tones";
 
 export const metadata = pageMetadata({
   title: "Programs",
-  description: `${PROGRAMS.description} Budget Bridge Foundation programs include live tutoring, school seminars, workshops, and financial literacy advocacy for students worldwide.`,
+  description: `${PROGRAMS.description} Budget Bridge Foundation programs include live tutoring, school seminars, workshops, soccer and media programs, and financial literacy advocacy for students worldwide.`,
   path: "/programs",
   keywords: ["financial literacy programs", "student financial education", "nonprofit education programs"],
 });
 
-const CARD_STYLE = {
+const CARD_STYLE: Record<
+  (typeof PROGRAMS.cards)[number]["href"],
+  { image?: MediaImage; doodle?: DoodleName; panelTone?: Tone; tone: Tone }
+> = {
   "/programs/education": { image: MEDIA.programs.gameclass, tone: "teal" },
   "/programs/seminars": { image: MEDIA.highlights.story, tone: "coral" },
+  "/programs/soccer-and-media": { doodle: "soccer", panelTone: "marigold", tone: "lilac" },
   "/advocacy": { image: MEDIA.advocacy.photos[0], tone: "forest" },
-} as const satisfies Record<
-  (typeof PROGRAMS.cards)[number]["href"],
-  { image: MediaImage; tone: Tone }
->;
+};
 
 const IMPACT: { value: string; label: string; tone: Tone; tilt: number }[] = [
   { value: `${SITE.impact.students}+`, label: "students reached", tone: "marigold", tilt: -3 },
@@ -45,7 +47,7 @@ export default function ProgramsPage() {
       />
 
       <PageSection>
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {PROGRAMS.cards.map((card, index) => {
             const style = CARD_STYLE[card.href];
             return (
@@ -56,6 +58,8 @@ export default function ProgramsPage() {
                   href={card.href}
                   tone={style.tone}
                   image={style.image}
+                  doodle={style.doodle}
+                  panelTone={style.panelTone}
                   aspect="aspect-[4/3]"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />

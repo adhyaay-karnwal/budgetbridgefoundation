@@ -34,16 +34,19 @@ export const SEO_KEYWORDS = [
   "financial literacy advocacy",
   "financial literacy legislation",
   "volunteer financial education",
+  "soccer financial literacy",
+  "financial literacy media",
+  "free financial literacy resources",
 ] as const;
 
 export const DEFAULT_DESCRIPTION =
-  "Budget Bridge Foundation is a student-led 501(c)(3) nonprofit teaching personal finance, money skills, and financial literacy through seminars, tutoring, workshops, and policy advocacy worldwide.";
+  "Budget Bridge Foundation is a student-led 501(c)(3) for soccer, media, education, and financial literacy, teaching money skills through seminars, tutoring, workshops, and policy advocacy worldwide.";
 
 export const HOME_TITLE =
   "Budget Bridge Foundation | Budget Bridge | Financial Literacy Nonprofit";
 
 export const HOME_DESCRIPTION =
-  "Budget Bridge Foundation is a student-led financial literacy nonprofit. Free seminars, live tutoring, workshops, and advocacy help students learn budgeting, saving, credit, and money management.";
+  "Budget Bridge Foundation is a student-led soccer, media, education, and financial literacy nonprofit. Free seminars, live tutoring, workshops, and advocacy help students learn budgeting, saving, credit, and money management.";
 
 export function absoluteUrl(path: string, baseUrl: string = SITE.url): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
@@ -86,6 +89,8 @@ export const SITEMAP_ROUTES: SitemapRoute[] = [
   { path: "/programs", changeFrequency: "monthly", priority: 0.9 },
   { path: "/programs/education", changeFrequency: "monthly", priority: 0.85 },
   { path: "/programs/seminars", changeFrequency: "monthly", priority: 0.85 },
+  { path: "/programs/soccer-and-media", changeFrequency: "monthly", priority: 0.85 },
+  { path: "/vault", changeFrequency: "monthly", priority: 0.85 },
   { path: "/advocacy", changeFrequency: "monthly", priority: 0.9 },
   { path: "/partners", changeFrequency: "weekly", priority: 0.8 },
   { path: "/get-involved", changeFrequency: "monthly", priority: 0.85 },

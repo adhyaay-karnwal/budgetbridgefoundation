@@ -3,6 +3,8 @@ export type PartnerCountry = {
   name: string;
   /** Country centroid as [latitude, longitude] for the globe. */
   location: [number, number];
+  /** Newest partner — gets a "new" badge on the partners page. */
+  isNew?: boolean;
 };
 
 /**
@@ -53,6 +55,7 @@ export const PARTNER_COUNTRIES: PartnerCountry[] = [
   { id: "germany", name: "Germany", location: [51.17, 10.45] },
   { id: "ghana", name: "Ghana", location: [7.95, -1.02] },
   { id: "greece", name: "Greece", location: [39.07, 21.82] },
+  { id: "guyana", name: "Guyana", location: [4.86, -58.93], isNew: true },
   { id: "haiti", name: "Haiti", location: [18.97, -72.29] },
   { id: "hong-kong", name: "Hong Kong", location: [22.4, 114.11] },
   { id: "india", name: "India", location: [20.59, 78.96] },
@@ -128,6 +131,8 @@ export const PARTNER_COUNTRIES: PartnerCountry[] = [
 ];
 
 export const PARTNER_COUNTRY_COUNT = PARTNER_COUNTRIES.length;
+
+export const NEWEST_PARTNERS = PARTNER_COUNTRIES.filter((country) => country.isNew);
 
 export function partnerCountriesByLetter(): [string, PartnerCountry[]][] {
   const groups = new Map<string, PartnerCountry[]>();

@@ -186,6 +186,38 @@ export function DoodlePeople(props: DoodleProps) {
   );
 }
 
+export function DoodleSoccer(props: DoodleProps) {
+  return (
+    <Doodle {...props}>
+      <path d="M32 9.5c12.6-.2 22.6 10 22.4 22.6C54.2 44.6 44 54.6 31.6 54.4 19.2 54.2 9.4 44 9.6 31.6 9.8 19.6 19.8 9.7 32 9.5z" />
+      <path d="m32 23.6 7.4 5.4-2.8 8.8h-9.2L24.6 29z" />
+      <path d="M32 23.6V10.4M39.4 29l13-4.2M36.6 37.8l7.8 11.4M27.4 37.8l-7.8 11.4M24.6 29l-13-4.2" opacity=".7" />
+    </Doodle>
+  );
+}
+
+export function DoodleCamera(props: DoodleProps) {
+  return (
+    <Doodle {...props}>
+      <path d="M10.5 20.5c9.6-.6 19.4-.6 29 0 1.6.2 2.6 1.2 2.6 2.8.4 6.6.4 13.2 0 19.8-.1 1.6-1.1 2.6-2.7 2.8-9.6.6-19.2.6-28.8 0-1.6-.2-2.6-1.2-2.7-2.8-.4-6.6-.4-13.2 0-19.8.1-1.6 1-2.6 2.6-2.8z" />
+      <path d="m42.5 29 12-7.4v21.2l-12-7.4" />
+      <circle cx="16.5" cy="27.5" r="2" fill="currentColor" stroke="none" />
+      <path d="M22 51.5c6.6-.6 13.4-.6 20 0" opacity=".6" />
+    </Doodle>
+  );
+}
+
+export function DoodleVault(props: DoodleProps) {
+  return (
+    <Doodle {...props}>
+      <path d="M11 9.5c14-.6 28-.6 42 0 1.4.1 2.4 1.1 2.5 2.5.6 12.6.6 25.4 0 38-.1 1.4-1.1 2.4-2.5 2.5-14 .6-28 .6-42 0-1.4-.1-2.4-1.1-2.5-2.5-.6-12.6-.6-25.4 0-38 .1-1.4 1.1-2.4 2.5-2.5z" />
+      <path d="M29.5 20c6.4-.1 11.4 5 11.4 11.2s-5 11.4-11.4 11.3S18 37.4 18.1 31.2 23.2 20.1 29.5 20z" />
+      <path d="M29.5 20v4.6M29.5 37.8v4.6M18.2 31.2h4.6M36.3 31.2h4.6" opacity=".7" />
+      <path d="M48 25v12.5M17 52.5v4M47 52.5v4" />
+    </Doodle>
+  );
+}
+
 /** Curly hand-drawn arrow for annotations */
 export function DoodleArrow({
   size = 64,
@@ -262,6 +294,9 @@ export const DOODLES = {
   magnifier: DoodleMagnifier,
   scale: DoodleScale,
   people: DoodlePeople,
+  soccer: DoodleSoccer,
+  camera: DoodleCamera,
+  vault: DoodleVault,
 } as const;
 
 export type DoodleName = keyof typeof DOODLES;

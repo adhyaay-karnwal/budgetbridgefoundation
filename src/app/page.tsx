@@ -27,7 +27,7 @@ import {
 import { Marquee } from "@/components/playful/Marquee";
 import { Reveal } from "@/components/playful/Reveal";
 import { TiltCard } from "@/components/playful/TiltCard";
-import { getBlogPostsSorted } from "@/lib/content";
+import { getBlogPostsSorted, PROGRAMS, VAULT } from "@/lib/content";
 import { homeMetadata } from "@/lib/metadata";
 import { MEDIA } from "@/lib/media";
 import { PARTNER_COUNTRIES } from "@/lib/partners";
@@ -47,6 +47,8 @@ const HERO_PHOTOS: {
   { image: MEDIA.advocacy.photos[2], tone: "coral", rotate: -3 },
   { image: MEDIA.advocacy.photos[3], tone: "lilac", rotate: 6 },
 ];
+
+const PILLAR_TILTS = [-2, 1.5, -1, 2];
 
 const STATS: { value: string; text: string; color: string }[] = [
   { value: `${SITE.impact.students}+`, text: "students reached, with partners in", color: "text-coral" },
@@ -82,6 +84,13 @@ const PROGRAM_ROWS: {
     href: "/programs/education#gameclass",
     doodle: "bulb",
     color: "text-lilac",
+  },
+  {
+    title: PROGRAMS.cards[2].title,
+    description: PROGRAMS.cards[2].description,
+    href: PROGRAMS.cards[2].href,
+    doodle: "soccer",
+    color: "text-blush",
   },
   {
     title: HOME.programs.tabs[2].label,
@@ -149,7 +158,7 @@ function Hero() {
           className="page-enter-text group inline-flex items-center gap-3 rounded-full border-2 border-ink bg-cream py-1 pl-1 pr-4 text-[14px] text-ink transition-colors hover:bg-paper"
         >
           <span className="rounded-full bg-marigold px-3 py-1 text-[12px] font-medium uppercase tracking-[0.12em]">
-            New
+            {HERO.announcement.tag}
           </span>
           <span className="line-clamp-1">{HERO.announcement.title}</span>
           <Icon
@@ -225,10 +234,66 @@ function ImpactSentence() {
             ))}
           </p>
           <p className="mt-10 text-[13px] font-medium uppercase tracking-[0.2em] text-ink-soft">
-            Seminars · Tutoring · Workshops · Competitions · Advocacy · Curriculum
+            {SITE.focus}
           </p>
         </Reveal>
       </div>
+    </section>
+  );
+}
+
+function Pillars() {
+  return (
+    <section className="content-gutter-x pt-24 sm:pt-32">
+      <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-16">
+        <Reveal>
+          <SectionLabel>{HOME.pillars.label}</SectionLabel>
+          <SectionHeading>{HOME.pillars.heading}</SectionHeading>
+        </Reveal>
+        <Reveal delay={80}>
+          <p className="max-w-xl text-[18px] leading-8 text-ink-soft">
+            {HOME.pillars.body}
+          </p>
+        </Reveal>
+      </div>
+
+      <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {HOME.pillars.items.map((pillar, index) => {
+          const t = TONES[pillar.tone];
+          const Doodle = DOODLES[pillar.doodle];
+          return (
+            <Reveal as="li" key={pillar.id} delay={index * 90}>
+              <Link
+                href={pillar.href}
+                className={`hover-wiggle grain group flex h-full min-h-[300px] flex-col justify-between rounded-[28px] border-2 border-ink p-7 shadow-sticker-sm transition-[translate,rotate,box-shadow] duration-300 rotate-[var(--tilt)] hover:-translate-y-1.5 hover:rotate-0 hover:shadow-sticker ${t.bg} ${t.text}`}
+                style={{ "--tilt": `${PILLAR_TILTS[index]}deg` } as CSSProperties}
+              >
+                <div className="flex items-start justify-between">
+                  <Doodle size={72} className="wiggle-target" />
+                  <span className={`font-display text-[20px] ${t.muted}`}>
+                    0{index + 1}
+                  </span>
+                </div>
+                <div className="mt-10">
+                  <h3 className="font-display flex items-center gap-2 text-[32px] leading-tight">
+                    {pillar.title}
+                    <Icon
+                      icon={ArrowRight01Icon}
+                      size={22}
+                      strokeWidth={2}
+                      className="opacity-0 transition-[opacity,translate] duration-300 group-hover:translate-x-1 group-hover:opacity-100"
+                      aria-hidden
+                    />
+                  </h3>
+                  <p className={`mt-2 text-[16px] leading-7 ${t.muted}`}>
+                    {pillar.description}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          );
+        })}
+      </ul>
     </section>
   );
 }
@@ -401,6 +466,59 @@ function Partners() {
   );
 }
 
+function VaultTeaser() {
+  return (
+    <section className="content-gutter-x pb-24">
+      <div className="grain relative overflow-hidden rounded-[36px] bg-forest px-6 py-14 text-cream sm:px-12 lg:py-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal>
+            <SectionLabel className="text-cream/80">{HOME.vault.label}</SectionLabel>
+            <SectionHeading className="text-cream">{HOME.vault.heading}</SectionHeading>
+            <p className="mt-7 max-w-lg text-[18px] leading-8 text-cream/80">
+              {HOME.vault.body}
+            </p>
+            <CtaRow
+              primary={HOME.vault.primaryCta}
+              primaryVariant="marigold"
+              secondary={HOME.vault.secondaryCta}
+              secondaryVariant="light"
+            />
+          </Reveal>
+
+          {/* Deposit-box drawers that slide out on hover */}
+          <Reveal delay={120}>
+            <ul className="grid grid-cols-2 gap-3 rounded-[28px] border-2 border-ink bg-ink p-3 sm:grid-cols-3">
+              {VAULT.items.slice(0, 6).map((item) => {
+                const t = TONES[item.tone];
+                const Doodle = DOODLES[item.doodle];
+                return (
+                  <li key={item.id}>
+                    <Link
+                      href={`/vault#${item.id}`}
+                      className={`group flex h-full min-h-[118px] flex-col justify-between rounded-[18px] border-2 border-ink p-4 transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_6px_0_0_rgba(0,0,0,0.35)] ${t.bg} ${t.text}`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <Doodle size={34} />
+                        <span
+                          className="h-2 w-8 rounded-full border-2 border-current opacity-70 transition-[width] duration-300 group-hover:w-11"
+                          aria-hidden
+                        />
+                      </div>
+                      <span className="mt-4 text-[14px] font-medium leading-5">
+                        {item.title}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Explore() {
   return (
     <section className="content-gutter-x pb-28">
@@ -500,10 +618,12 @@ export default function Home() {
     <main>
       <Hero />
       <ImpactSentence />
+      <Pillars />
       <Mission />
       <Programs />
       <TryIt />
       <Partners />
+      <VaultTeaser />
       <Explore />
       <Stories />
     </main>
